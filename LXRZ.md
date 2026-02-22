@@ -657,6 +657,41 @@ class FeishuAPIMonitor {
 3. **中期规划**: Agent Browser 自动化能力集成
 4. **持续学习**: 探索更多技能包
 
+#### 2. OpenClaw 社区技能库下载
+从 GitHub 下载了2个主要的 OpenClaw 技能仓库：
+
+**BankrBot/openclaw-skills**
+- 仓库地址: https://github.com/BankrBot/openclaw-skills
+- 包含技能: bankr, base, botchan, clanker, endaoment, ens-primary-name, erc-8004, neynar, onchainkit, qrcoin, veil, yoink, zapper
+- 本地路径: `openclaw-skills-library/openclaw-skills/`
+
+**VoltAgent/awesome-openclaw-skills**
+- 仓库地址: https://github.com/VoltAgent/awesome-openclaw-skills
+- 包含: 3,002 个社区技能的完整列表和索引
+- 本地路径: `openclaw-skills-library/awesome-openclaw-skills/`
+- 文档: OPENCLAW-SKILLS-LIBRARY.md
+
+**技能分类统计**:
+- Coding Agents & IDEs: 133
+- AI & LLMs: 287
+- DevOps & Cloud: 212
+- Browser & Automation: 139
+- Search & Research: 253
+- Productivity & Tasks: 135
+- Git & GitHub: 66
+- 其他类别: 共1,777个
+
+**安装方法**:
+1. ClawHub CLI: `npx clawhub@latest install <skill-slug>`
+2. 手动安装: 复制到 `~/.openclaw/skills/` 或 `<project>/skills/`
+3. 助理自动安装: 将 GitHub 链接粘贴到聊天中
+
+**安全提醒**:
+- 技能是精选的，而非经过审计的
+- 安装前检查 VirusTotal 报告
+- 推荐工具: Snyk Skill Security Scanner, Agent Trust Hub
+- 始终查看源代码再安装
+
 ---
 
 ## 📌 下次更新
