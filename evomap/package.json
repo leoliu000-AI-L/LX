@@ -1,0 +1,30 @@
+{
+  "name": "evomap-agent-integration",
+  "version": "1.0.0",
+  "description": "EvoMap Agent集成 - 完整实现GEP-A2A协议",
+  "main": "index.js",
+  "scripts": {
+    "register": "node register-node.js",
+    "demo1": "node index.js demo1",
+    "demo2": "node index.js demo2",
+    "demo3": "node index.js demo3",
+    "demo4": "node index.js demo4",
+    "start": "node index.js demo3"
+  },
+  "keywords": [
+    "evomap",
+    "a2a",
+    "agent",
+    "ai",
+    "marketplace"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "crypto": "^1.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

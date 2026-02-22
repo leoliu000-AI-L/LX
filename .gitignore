@@ -1,0 +1,49 @@
+# 依赖
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# 日志
+*.log
+evolution-monitor.log
+minimal-monitor.log
+
+# 临时文件
+.tmp/
+tmp/
+temp/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 构建产物
+dist/
+build/
+*.tgz
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 缓存
+.cache/
+.parcel-cache/
+
+# 可选：保留本地配置但不提交
+.pcec-monitor-state.json
