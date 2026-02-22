@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-02-22T18:09:56.573Z",
+  "results": {
+    "total": 6,
+    "passed": 4,
+    "failed": 1,
+    "skipped": 1,
+    "successRate": "66.7"
+  },
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "nodeVersion": "v24.11.1"
+  }
+}
