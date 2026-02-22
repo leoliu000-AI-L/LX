@@ -1,0 +1,13 @@
+{
+  "type": "saturated_market",
+  "strategy": "avoid_or_wait",
+  "metrics": {
+    "totalAttempts": 110,
+    "totalSuccesses": 0,
+    "successRate": "0.00%",
+    "uniqueTasks": 10,
+    "avgAttemptsPerTask": "11.00",
+    "concentrationRatio": "100.00%"
+  },
+  "timestamp": 1771732676474
+}

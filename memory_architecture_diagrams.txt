@@ -1,0 +1,674 @@
+# AI Agent Memory Systems - Architecture Diagrams
+
+This file contains ASCII and text-based diagrams to visualize memory architectures and data flows.
+
+## 1. Hierarchical Memory Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        AI AGENT MEMORY SYSTEM                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│  L1: WORKING MEMORY (Fast, Limited, Volatile)                      │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │ • Current conversation context                               │  │
+│  │ • Active tasks and goals                                      │  │
+│  │ • Immediate user preferences                                  │  │
+│  │ • Capacity: ~20-100 items                                     │  │
+│  │ • Duration: Session only                                      │  │
+│  │ • Access time: < 1ms                                          │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   │ Consolidation
+                                   ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│  L2: RECENT MEMORY (Medium, Semi-Persistent)                       │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │ • Last N sessions (recent)                                   │  │
+│  │ • Frequently accessed memories                               │  │
+│  │ • Task-specific context                                      │  │
+│  │ • Capacity: ~100-1000 items                                   │  │
+│  │ • Duration: Hours-Days                                       │  │
+│  │ • Access time: < 10ms                                         │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   │ Consolidation
+                                   ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│  L3: LONG-TERM MEMORY (Large, Persistent, Indexed)                 │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │ • Episodic: Events, experiences, interactions                │  │
+│  │ • Semantic: Facts, knowledge, concepts                       │  │
+│  │ • Procedural: Skills, workflows, procedures                  │  │
+│  │ • Capacity: Millions of items                                │  │
+│  │ • Duration: Permanent                                        │  │
+│  │ • Access time: 10-100ms (with indexing)                      │  │
+│  │ • Storage: Vector database (ChromaDB, Pinecone, etc.)        │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   │ Archival
+                                   ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│  L4: ARCHIVE (Cold Storage, Compressed)                             │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │ • Summarized old memories                                    │  │
+│  │ • Rarely accessed information                                │  │
+│  │ • Compressed storage                                         │  │
+│  │ • Capacity: Unlimited (disk space)                           │  │
+│  │ • Duration: Permanent (offline)                              │  │
+│  │ • Access time: Seconds to minutes                            │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 2. Memory Type Decision Tree
+
+```
+                      START
+                        │
+                        ▼
+              ┌─────────────────┐
+              │ Need to store   │
+              │ information?    │
+              └────────┬────────┘
+                       │ Yes
+                       ▼
+        ┌──────────────────────────────┐
+        │ Is this temporary/session    │
+        │ specific?                   │
+        └──────────┬───────────────────┘
+                   │ Yes                    │ No
+                   ▼                        ▼
+        ┌──────────────────┐     ┌──────────────────────┐
+        │ WORKING MEMORY   │     │ Is this about        │
+        │ (In-Memory)      │     │ HOW to do something? │
+        └──────────────────┘     └──────────┬───────────┘
+                                            │ Yes              │ No
+                                            ▼                  ▼
+                                ┌──────────────────┐  ┌──────────────────┐
+                                │ PROCEDURAL       │  │ Is this a        │
+                                │ MEMORY           │  │ specific event?  │
+                                │ (Skills/Steps)   │  └────────┬─────────┘
+                                └──────────────────┘           │ Yes      │ No
+                                                                  ▼         ▼
+                                                      ┌────────────┐ ┌────────────┐
+                                                      │ EPISODIC   │ │ SEMANTIC   │
+                                                      │ MEMORY     │ │ MEMORY     │
+                                                      │ (Events)   │ │ (Facts)    │
+                                                      └────────────┘ └────────────┘
+```
+
+---
+
+## 3. RAG (Retrieval-Augmented Generation) Pipeline
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                          RAG PIPELINE                               │
+└─────────────────────────────────────────────────────────────────────┘
+
+  USER QUERY
+      │
+      ▼
+┌─────────────────┐
+│  Query Encoder  │  → Generate embedding for query
+│  (LLM Embed)    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│              VECTOR DATABASE SEARCH                     │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │  ┌─────────┐  ┌─────────┐  ┌─────────┐          │  │
+│  │  │ Memory 1│  │ Memory 2│  │ Memory 3│  ...     │  │
+│  │  │ Embed   │  │ Embed   │  │ Embed   │          │  │
+│  │  └────┬────┘  └────┬────┘  └────┬────┘          │  │
+│  └───────┼───────────┼───────────┼─────────────────┘  │
+│          │           │           │                     │
+│          └───────────┴───────────┴─────┐               │
+│                  Similarity Search    │               │
+│                  (Cosine/ Euclidean)  │               │
+└───────────────────┬────────────────────┘               │
+                    │ Top-K results                      │
+                    ▼                                    │
+         ┌──────────────────────┐                       │
+         │   Top-K Selection    │                       │
+         │   (Threshold: 0.7)   │                       │
+         └──────────┬───────────┘                       │
+                    │                                    │
+                    ▼                                    │
+┌─────────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────┐
+│     Context Assembly                │
+│  ┌───────────────────────────────┐  │
+│  │ Doc 1: [content]             │  │
+│  │ Doc 2: [content]             │  │
+│  │ Doc 3: [content]             │  │
+│  │ ...                           │  │
+│  └───────────────────────────────┘  │
+└──────────┬──────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────┐
+│     Prompt Construction             │
+│  ┌───────────────────────────────┐  │
+│  │ System: You are a helpful... │  │
+│  │                               │  │
+│  │ Context:                      │  │
+│  │ [Assembled context]           │  │
+│  │                               │  │
+│  │ Question:                     │  │
+│  │ [User query]                  │  │
+│  └───────────────────────────────┘  │
+└──────────┬──────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────┐
+│     LLM Generation                  │
+│  (GPT-4, Claude, etc.)              │
+└──────────┬──────────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────┐
+│     Response with Sources           │
+│  ┌───────────────────────────────┐  │
+│  │ Answer: [Generated text]      │  │
+│  │                               │  │
+│  │ Sources:                      │  │
+│  │ • Doc 1 (similarity: 0.92)    │  │
+│  │ • Doc 2 (similarity: 0.87)    │  │
+│  └───────────────────────────────┘  │
+└─────────────────────────────────────┘
+           │
+           ▼
+       USER
+```
+
+---
+
+## 4. Memory Consolidation Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    MEMORY CONSOLIDATION                            │
+└─────────────────────────────────────────────────────────────────────┘
+
+DETAILED MEMORIES (Recent)
+┌─────────────────────────────────────────────────────────────────┐
+│ • Full content                                                  │
+│ • Rich metadata                                                 │
+│ • Embeddings                                                    │
+│ • Timestamps                                                    │
+└────────────────┬────────────────────────────────────────────────┘
+                 │
+                 │ Age > 7 days OR Count > 100
+                 ▼
+         ┌───────────────┐
+         │ Summarization │  ← LLM creates summary
+         └───────┬───────┘
+                 │
+                 ▼
+SUMMARIZED MEMORIES (Medium-term)
+┌─────────────────────────────────────────────────────────────────┐
+│ • Summarized content (30% of original)                         │
+│ • Key themes extracted                                          │
+│ • Aggregated metadata                                           │
+└────────────────┬────────────────────────────────────────────────┘
+                 │
+                 │ Age > 30 days OR Count > 500
+                 ▼
+         ┌───────────────┐
+         │ Compression  │  ← Theme clustering
+         └───────┬───────┘
+                 │
+                 ▼
+ARCHIVED MEMORIES (Long-term)
+┌─────────────────────────────────────────────────────────────────┐
+│ • Highly compressed (10% of original)                           │
+│ • Key themes only                                               │
+│ • Minimal metadata                                              │
+│ • Cold storage                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 5. Data Flow: Adding a Memory
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    ADD MEMORY WORKFLOW                             │
+└─────────────────────────────────────────────────────────────────────┘
+
+INPUT
+  │
+  ├─ Content: "User prefers Python for data science"
+  ├─ Type: episodic/semantic/procedural
+  └─ Metadata: {"category": "preference", "confidence": 0.9}
+      │
+      ▼
+┌─────────────────────┐
+│  VALIDATION         │  ← Check format, required fields
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  CLASSIFICATION     │  ← Determine memory type
+└──────────┬──────────┘
+           │
+           ├──→ Episodic → Episode Store
+           ├──→ Semantic → Fact Store
+           └──→ Procedural → Procedure Store
+           │
+           ▼
+┌─────────────────────┐
+│  EMBEDDING (if applicable)
+└──────────┬──────────┘
+           │
+           ├─ Text → Embedding Model → Vector
+           └─ Store vector with memory
+           │
+           ▼
+┌─────────────────────┐
+│  IMPORTANCE SCORING │  ← Calculate initial importance
+└──────────┬──────────┘
+           │
+           ├─ Recency: 1.0 (new)
+           ├─ Frequency: 0.0 (first access)
+           ├─ Semantic: TBD (context-dependent)
+           └─ Explicit: from metadata
+           │
+           ▼
+┌─────────────────────┐
+│  STORAGE            │  ← Store in appropriate tier
+└──────────┬──────────┘
+           │
+           ├─ If important > 0.8 → Working Memory
+           ├─ If important > 0.5 → Recent Memory
+           └─ Else → Long-term Memory
+           │
+           ▼
+┌─────────────────────┐
+│  INDEXING           │  ← Create indexes for retrieval
+└──────────┬──────────┘
+           │
+           ├─ Text index (keyword search)
+           ├─ Vector index (semantic search)
+           ├─ Metadata index (filtering)
+           └─ Temporal index (recency)
+           │
+           ▼
+      MEMORY STORED
+      ID: mem_12345
+      └─> Can now be retrieved
+```
+
+---
+
+## 6. Data Flow: Retrieving Memories
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                   RETRIEVAL WORKFLOW                               │
+└─────────────────────────────────────────────────────────────────────┘
+
+USER QUERY
+  │
+  ├─ Query text: "What are the user's programming preferences?"
+  ├─ Query type: semantic/keyword/hybrid
+  └─ Filters: {"type": "preference", "min_importance": 0.5}
+      │
+      ▼
+┌─────────────────────┐
+│  QUERY EXPANSION    │  ← Expand with context if needed
+└──────────┬──────────┘
+           │
+           ├─ Add conversation history context
+           ├─ Disambiguate terms
+           └─ Generate variations
+           │
+           ▼
+┌─────────────────────┐
+│  MULTI-TIER SEARCH  │  ← Search all memory levels
+└──────────┬──────────┘
+           │
+           ├─ Working Memory: Exact match + recent context
+           ├─ Recent Memory: Keyword + fuzzy match
+           └─ Long-term: Semantic similarity search
+           │
+           ▼
+┌─────────────────────┐
+│  RESULT AGGREGATION │  ← Combine results from all tiers
+└──────────┬──────────┘
+           │
+           ├─ Collect candidates from each tier
+           ├─ Remove duplicates
+           └─ Merge with tier information
+           │
+           ▼
+┌─────────────────────┐
+│  RE-RANKING         │  ← Re-rank by relevance
+└──────────┬──────────┘
+           │
+           ├─ Calculate query-document similarity
+           ├─ Apply importance boost
+           ├─ Apply recency boost
+           └─ Calculate combined score
+           │
+           ▼
+┌─────────────────────┐
+│  TOP-K SELECTION    │  ← Select best results
+└──────────┬──────────┘
+           │
+           ├─ Sort by combined score
+           ├─ Apply diversity filter (optional)
+           └─ Return top-K results
+           │
+           ▼
+┌─────────────────────┐
+│  RESPONSE BUILDING  │  ← Format results
+└──────────┬──────────┘
+           │
+           ├─ Format with metadata
+           ├─ Add similarity scores
+           └─ Include source information
+           │
+           ▼
+      RESULTS RETURNED
+      ├─ Memory 1: "User prefers Python..." (similarity: 0.92)
+      ├─ Memory 2: "User uses pandas for..." (similarity: 0.87)
+      └─ Memory 3: "User likes Jupyter..." (similarity: 0.81)
+```
+
+---
+
+## 7. System Architecture: Complete AI Agent with Memory
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    AI AGENT WITH MEMORY                            │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                     USER INTERFACE                               │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │   Chat UI    │  │    API       │  │  Web Hooks   │          │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘          │
+└─────────┼──────────────────┼──────────────────┼─────────────────┘
+          │                  │                  │
+          └──────────────────┴──────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    REQUEST HANDLER                              │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ • Parse request                                         │    │
+│  │ • Extract query/intent                                  │    │
+│  │ • Load conversation context                            │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    MEMORY MANAGER                               │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ ┌────────────┐  ┌────────────┐  ┌────────────┐        │    │
+│  │ │   Working  │  │   Recent   │  │  Long-term │        │    │
+│  │ │   Memory   │  │   Memory   │  │   Memory   │        │    │
+│  │ └─────┬──────┘  └─────┬──────┘  └─────┬──────┘        │    │
+│  │       │                │                │              │    │
+│  │       └────────────────┴────────────────┘              │    │
+│  │                       │                                │    │
+│  │              ┌────────┴────────┐                       │    │
+│  │              │  Memory Router │                       │    │
+│  │              │  (Add/Retrieve)│                       │    │
+│  │              └─────────────────┘                       │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    RETRIEVAL ENGINE                             │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ ┌────────────┐  ┌────────────┐  ┌────────────┐        │    │
+│  │ │   Keyword  │  │   Vector   │  │   Hybrid   │        │    │
+│  │ │   Search   │  │   Search   │  │   Search   │        │    │
+│  │ └─────┬──────┘  └─────┬──────┘  └─────┬──────┘        │    │
+│  │       │                │                │              │    │
+│  │       └────────────────┴────────────────┘              │    │
+│  │                       │                                │    │
+│  │              ┌────────┴────────┐                       │    │
+│  │              │  Re-ranking &   │                       │    │
+│  │              │  Filtering      │                       │    │
+│  │              └─────────────────┘                       │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    CONTEXT BUILDER                              │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ • Assemble retrieved memories                           │    │
+│  │ • Build conversation history                            │    │
+│  │ • Format for LLM                                        │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    LLM INTERFACE                                │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ • Choose model (GPT-4, Claude, etc.)                   │    │
+│  │ • Construct prompt                                     │    │
+│  │ • Call LLM API                                         │    │
+│  │ • Parse response                                       │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    RESPONSE PROCESSOR                           │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ • Extract answer                                        │    │
+│  │ • Format with sources                                   │    │
+│  │ • Add metadata                                          │    │
+│  └────────────────────┬───────────────────────────────────┘    │
+└───────────────────────┼───────────────────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    MEMORY UPDATER                              │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │ • Store conversation                                   │    │
+│  │ • Update access counts                                 │    │
+│  │ • Adjust importance scores                             │    │
+│  │ • Trigger consolidation if needed                      │    │
+│  └────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
+                        │
+                        ▼
+                   RESPONSE
+                        │
+                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     USER INTERFACE                               │
+│  (Chat UI, API Response, Webhook Callback)                      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 8. Comparison: Vector Databases
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              VECTOR DATABASE COMPARISON MATRIX                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌──────────────┬──────────┬──────────┬──────────┬──────────┬─────────┐
+│   Feature    │ ChromaDB │ Pinecone │  FAISS   │ Weaviate │ Qdrant  │
+├──────────────┼──────────┼──────────┼──────────┼──────────┼─────────┤
+│ Setup        │    ★     │    ★★   │   ★★★   │   ★★★★  │   ★★★   │
+│ Ease of Use  │    ★    │    ★★★  │   ★★    │   ★★    │   ★★★   │
+│ Performance  │   ★★    │   ★★★★  │  ★★★★★  │  ★★★★   │  ★★★★★  │
+│ Scalability  │   ★★    │  ★★★★★  │  ★★★★★  │  ★★★★   │  ★★★★   │
+│ Cost         │  Free   │   Paid   │  Free   │  Free*  │  Free*  │
+│ Managed      │    No   │   Yes    │   No    │  Optional│ Optional│
+│ Local        │   Yes   │   No     │   Yes   │   Yes   │   Yes   │
+│ Cloud        │   No    │   Yes    │   No    │   Yes   │   Yes   │
+│ Hybrid Search│   No    │   Yes    │   No    │   Yes   │   Yes   │
+│ Filtering    │   Yes   │   Yes    │   No    │   Yes   │   Yes   │
+├──────────────┼──────────┼──────────┼──────────┼──────────┼─────────┤
+│ Best For     │Prototype │Production│ Batch    │ Custom  │Production│
+│              │Small App │  Apps    │Processing│ Deploy  │ Self-host│
+└──────────────┴──────────┴──────────┴──────────┴──────────┴─────────┘
+
+Legend:
+  ★ = Very Easy/Fast/Good
+  ★★★ = Moderate
+  ★★★★★ = Excellent/Advanced
+  * = Free self-hosted, paid cloud options
+```
+
+---
+
+## 9. Memory Lifecycle
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    MEMORY LIFECYCLE                                │
+└─────────────────────────────────────────────────────────────────────┘
+
+   CREATION
+      │
+      ├─ Generate ID
+      ├─ Classify type (episodic/semantic/procedural)
+      ├─ Generate embedding
+      ├─ Calculate initial importance
+      └─ Store in working memory
+      │
+      ▼
+   ACTIVE USE
+      │
+      ├─ Access (increases access count)
+      ├─ Update importance (recency boost)
+      ├─ Modify metadata
+      └─ Link to related memories
+      │
+      ▼
+   AGING
+      │
+      ├─ Importance decay (time-based)
+      ├─ Move to lower tier
+      ├─ Consolidate with similar memories
+      └─ Summarize detailed content
+      │
+      ▼
+   RETENTION DECISION
+      │
+      ├─ High importance + high access → Keep active
+      ├─ Medium importance → Consolidate
+      ├─ Low importance + old → Archive or delete
+      └─ Duplicate → Merge
+      │
+      ▼
+   CONSOLIDATION
+      │
+      ├─ Similar memories merged
+      ├─ Detailed → Summarized
+      ├─ Recent → Archived
+      └─ Update indexes
+      │
+      ▼
+   ARCHIVE / DELETE
+      │
+      ├─ Archive: Cold storage, compressed
+      ├─ Delete: Remove from all indexes
+      └─ Backup: Optional before deletion
+```
+
+---
+
+## 10. Key Metrics to Monitor
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              MEMORY SYSTEM MONITORING                              │
+└─────────────────────────────────────────────────────────────────────┘
+
+PERFORMANCE METRICS:
+┌─────────────────────────────────────────────────────────────────┐
+│ • Retrieval Latency                                              │
+│   ├─ Working Memory: < 1ms                                       │
+│   ├─ Recent Memory: < 10ms                                      │
+│   └─ Long-term Memory: 10-100ms                                 │
+│                                                                  │
+│ • Storage Growth                                                 │
+│   ├─ Total memories: < 1M (small), 1-10M (medium), > 10M (large)│
+│   ├─ Growth rate: memories/day                                  │
+│   └─ Storage size: GB/TB                                        │
+│                                                                  │
+│ • Query Performance                                              │
+│   ├─ Avg query time                                              │
+│   ├─ P95/P99 query time                                         │
+│   └─ Cache hit rate                                             │
+└─────────────────────────────────────────────────────────────────┘
+
+QUALITY METRICS:
+┌─────────────────────────────────────────────────────────────────┐
+│ • Retrieval Quality                                              │
+│   ├─ Similarity scores distribution                              │
+│   ├─ Relevance feedback (user ratings)                          │
+│   └─ Result diversity                                           │
+│                                                                  │
+│ • Memory Health                                                  │
+│   ├─ Avg importance score                                       │
+│   ├─ Access distribution (percentiles)                          │
+│   └─ Duplicate rate                                             │
+└─────────────────────────────────────────────────────────────────┘
+
+COST METRICS:
+┌─────────────────────────────────────────────────────────────────┐
+│ • Embedding Costs                                                │
+│   ├─ Tokens per month                                           │
+│   ├─ Cost per 1K tokens                                         │
+│   └─ Total embedding cost                                       │
+│                                                                  │
+│ • Storage Costs                                                  │
+│   ├─ Vector DB costs (if using managed)                         │
+│   ├─ Disk usage                                                 │
+│   └─ Backup storage                                             │
+│                                                                  │
+│ • API Costs                                                      │
+│   ├─ LLM calls per month                                        │
+│   ├─ Total tokens used                                          │
+│   └─ Cost breakdown                                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Notes
+
+These diagrams provide visual representations of key concepts in AI agent memory systems:
+
+1. **Hierarchical Architecture**: Shows tiered memory structure
+2. **Decision Tree**: Helps choose the right memory type
+3. **RAG Pipeline**: Complete retrieval-augmented generation flow
+4. **Consolidation Flow**: How memories are compressed over time
+5. **Add Memory**: Step-by-step memory creation workflow
+6. **Retrieval**: How memories are fetched and ranked
+7. **System Architecture**: Complete AI agent with memory
+8. **Database Comparison**: Feature comparison matrix
+9. **Memory Lifecycle**: From creation to deletion
+10. **Monitoring**: Key metrics to track
+
+Use these diagrams alongside the code examples and documentation for a complete understanding of AI agent memory systems.

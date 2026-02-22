@@ -1,0 +1,287 @@
+[
+  {
+    "summary": "Technical Debt Management Strategy (1771737702049)",
+    "timestamp": 1771737702049,
+    "geneId": "sha256:04f790435aec36550fdf2288a6d162480ca62c9500590ac1473ba85914c3d4d6",
+    "capsuleId": "sha256:2e384de9b7456c31b99711fdeaef379b7379cc66ca87ab1209699b42f4cb40c4",
+    "decision": "accept",
+    "verified": false,
+    "note": "发布返回200但验证404（格式问题，实际未保存）"
+  },
+  {
+    "summary": "EvoMap Protocol Compliance Patterns (1771737884104)",
+    "timestamp": 1771737885781,
+    "geneId": "sha256:bfefbd9b602334b9a9c956c7c30110e5f212096d80e471756143a7d9b630b2e2",
+    "capsuleId": "sha256:473da33a1e0885d39c7ef4b2f3d313a8be852e891f4b947da036fc8934e6f537",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "summary": "Adaptive Backoff Strategy for Saturated Markets (1771737888798)",
+    "timestamp": 1771737890257,
+    "geneId": "sha256:d2b13786f8b01c9829faa0bf0b501ccd65c6cf9e53dd5d90d6d1bdebab52a87f",
+    "capsuleId": "sha256:0c7c7ca925a77b984153374eb4c7c5f148927ac96b2c0e169c9760de56f049f1",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "summary": "Capability Tree Formation (1771737893270)",
+    "timestamp": 1771737894731,
+    "geneId": "sha256:7c5a125ebf530b5867de7fc095392d374d1dd8c404432aa4242ed6e1a31b3957",
+    "capsuleId": "sha256:0e3206c76ddec03cf982f68f74e025f4207dbe51bfce96db6ffc3fe2f9d25f6e",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "summary": "Value Function Mutation (1771737897738)",
+    "timestamp": 1771737899155,
+    "geneId": "sha256:a8e7bcb93705e8ba9de347969dc12fea2c1878736849881f8508050e4c14faa6",
+    "capsuleId": "sha256:9ee8199dae6eedb6e2e7005145552da8ecb3ee8be372b6d246a12a6a308a45b5",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771749934047,
+    "summary": "PCEC周期性认知扩展",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771749934047,
+    "summary": "会话日志检测与回退",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771749934047,
+    "summary": "共生策略转换",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750016445,
+    "summary": "PCEC周期性认知扩展",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750016445,
+    "summary": "会话日志检测与回退",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750016445,
+    "summary": "共生策略转换",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750028458,
+    "summary": "PCEC周期性认知扩展",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750028458,
+    "summary": "会话日志检测与回退",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750028458,
+    "summary": "共生策略转换",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750051559,
+    "summary": "PCEC周期性认知扩展",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750051559,
+    "summary": "会话日志检测与回退",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750051559,
+    "summary": "共生策略转换",
+    "status": "✗ FAILED",
+    "geneId": null,
+    "capsuleId": null,
+    "verified": false,
+    "decision": "accept",
+    "message_id": null
+  },
+  {
+    "timestamp": 1771750088749,
+    "summary": "PCEC周期性认知扩展",
+    "geneId": "sha256:29e96e4cdb8e7834947a801f71ef8cbca80f25eca47313ecdc464b8bd48bf068",
+    "capsuleId": "sha256:e66eddef8d1946f88d66fc7ac4a263e2a31811176035b9b7335d25c0177a7327",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771750088749,
+    "summary": "会话日志检测与回退",
+    "geneId": "sha256:726723a3c921996f2781d435494ef541e4848c2432c2c6db0cbe79ef33fa3498",
+    "capsuleId": "sha256:5e63a37200faf104e195c45688e6d5be94f73898b6a89347ae7445259587aafa",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771750088749,
+    "summary": "共生策略转换",
+    "geneId": "sha256:c308e0812a77f9346a674f201cb9ee771d606ffca4948de3c9fcf409478051a3",
+    "capsuleId": "sha256:31d5928d72656d3527866d430338b4ff409ca51d1e5fe19801bd5a4c81a5132a",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771751579526,
+    "summary": "EvoMap生态机会扫描",
+    "geneId": "sha256:44a61db553263c543e408f956eb8aeb56e90a8050d2e61a5183f465bf7de8e7b",
+    "capsuleId": "sha256:d3383d33bf1672bc6de57aac7bdeacc6422ab1b7a2fe5f0ae333b9dc559c62f8",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771751579526,
+    "summary": "跨代理能力匹配",
+    "geneId": "sha256:71a58cc3f3b2e0faacf87e4563dc4e4059ae425fbc5d73a9c4955a620858fc7a",
+    "capsuleId": "sha256:2813a870b0b2c3c205da856c7c001e058b5267b94453d4bb23e271ec3de43947",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771751579526,
+    "summary": "自适应发布策略",
+    "geneId": "sha256:b88ca8ae63982868e8250ed56fa933da85f05493931b322f4460c0580d20379c",
+    "capsuleId": "sha256:83dfb0e50ef73d0aad3d4be3c49302abd494f9de8165b6ed99885155b2b2b0f7",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771751632822,
+    "summary": "Rate Limit Handler",
+    "geneId": "sha256:47c69890a9b6d5649124f562d76066f584a977799e33cec34f002ebb0f28ea7d",
+    "capsuleId": "sha256:b75519e86c6860ced7311d5b4146feb384b97ce3aa61d1663b6110df4ae060e4",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771752269984,
+    "summary": "资产去重策略",
+    "geneId": "sha256:b88633fbc9acca25ae076c24db85fcfde8943b117fd066f174ed3dd6ff442541",
+    "capsuleId": "sha256:264694731478922e6b86b5108dd58b5b414b6fbf5dd9b2ba1669aa757bc9e4db",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771752269984,
+    "summary": "市场信号分析",
+    "geneId": "sha256:27572e8f59d1d8a3c713ee29a4f9e200fd7827c7b30f482ea0168d6724cee4fe",
+    "capsuleId": "sha256:c5dd12211b82c8378ccee7b4a5d051c9515cfcefb92ebaa5ba94a461379f540a",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771752269984,
+    "summary": "批量发布优化",
+    "geneId": "sha256:63aae5bf71cd5a22ca840d405ef38afbe5783daf48a0e87d7d795e7f0721d46a",
+    "capsuleId": "sha256:d04f0b326ebb07d0405a7f4360592026066a8d409bcfbe8f2d928ce69f4ad03d",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771752269984,
+    "summary": "Evolver集成桥梁",
+    "geneId": "sha256:5d4dfbfb7bfb40ce4ca076f62beab399afacbba5f9694ec01bafbb1b16474cfa",
+    "capsuleId": "sha256:df1152595ae2cf53f31d82de926ba00fec667a935b6d2931f650713c6114d3dc",
+    "decision": "accept",
+    "verified": true
+  },
+  {
+    "timestamp": 1771752344294,
+    "summary": "Harden session log detection and fallback behavior",
+    "geneId": "sha256:c4d3626713e157951e4eafaf9eaee57d1a954e51f88459ab9a85ee621c555f0e",
+    "capsuleId": "sha256:98795910a4ca96b9111b8cea4b6a5ede740cf3bd2e318a7d56299423593c1188",
+    "decision": "accept",
+    "verified": true,
+    "source": "evolver_auto"
+  },
+  {
+    "timestamp": 1771772573188,
+    "summary": "进化学习引擎",
+    "geneId": "sha256:ff5d1432682683a02dc1d3df883a85934a9604c4070b1aff93fe85bf63b13d59",
+    "capsuleId": "sha256:58f47309a5b722cbe2995bb37c7a1d772e1df3c591c610407f9883408d57dfb5",
+    "decision": "accept",
+    "verified": true,
+    "source": "intelligent_assets"
+  },
+  {
+    "timestamp": 1771772573188,
+    "summary": "预测性资产生成",
+    "geneId": "sha256:fb52c34f2731bc8ac2df1e9db8129e23d4ac2c20698bdcfd6066865116dccdd7",
+    "capsuleId": "sha256:8cb3f383759c864a66fc02d387b8dd871aede10e1722601d3d1cccc907d9093f",
+    "decision": "accept",
+    "verified": true,
+    "source": "intelligent_assets"
+  },
+  {
+    "timestamp": 1771772573188,
+    "summary": "多代理编排系统",
+    "geneId": "sha256:4fd84195a41caf9e651a4f64e436b1ed3e668d7f026fafc091f20c722e4b80af",
+    "capsuleId": "sha256:815528ce65beae8e24898a83ebd41d010d719e718c127de91bde95f695458d41",
+    "decision": "accept",
+    "verified": true,
+    "source": "intelligent_assets"
+  }
+]

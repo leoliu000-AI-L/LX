@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐴 出行风水测算</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: #F5F5F5;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ==================== 封面页面 ==================== */
+        .cover-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, #8B0000 0%, #DC143C 50%, #FF3B30 100%);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            overflow: hidden;
+        }
+
+        /* 封面容器 */
+        .cover-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 提示文字区域 */
+        .cover-hint {
+            position: absolute;
+            top: 3%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 20;
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* 图片2区域（顶部装饰） */
+        .cover-top-image {
+            width: 100%;
+            height: 35%;
+            background-image: url('./image2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* 图片1区域（生肖图） */
+        .cover-zodiac-image {
+            width: 90%;
+            max-width: 400px;
+            height: 55%;
+            background-image: url('./image1.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 生肖按钮区域 */
+        .zodiac-buttons-overlay {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            height: 55%;
+            z-index: 15;
+        }
+
+        /* 生肖按钮网格 */
+        .zodiac-btn-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            height: 100%;
+            padding: 5%;
+        }
+
+        .zodiac-click-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zodiac-click-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .zodiac-click-btn:hover::before {
+            opacity: 1;
+        }
+
+        .zodiac-click-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .zodiac-click-btn:active {
+            transform: scale(1.05);
+        }
+
+        .cover-page.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        /* 移除按钮样式 */
+
+        /* ==================== 测算页面 ==================== */
+        .main-page {
+            opacity: 0;
+            transition: opacity 0.5s ease 0.3s;
+        }
+
+        .main-page.show {
+            opacity: 1;
+        }
+
+        /* 顶部导航栏 */
+        .nav-header {
+            background: rgba(255, 59, 48, 0.95);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+        }
+
+        .nav-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-header .zodiac-icon {
+            font-size: 24px;
+        }
+
+        /* 主题横幅 */
+        .theme-banner {
+            background: rgba(255, 59, 48, 0.08);
+            color: #FF3B30;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-banner::before {
+            content: attr(data-zodiac);
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.05;
+            top: -10px;
+            right: -10px;
+        }
+
+        .theme-banner h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .theme-banner p {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* 表单区域 */
+        .form-section {
+            padding: 20px 16px;
+        }
+
+        .form-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #FF3B30;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(255, 59, 48, 0.15);
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s;
+            color: #333333;
+        }
+
+        .form-group input::placeholder {
+            color: #999999;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FF3B30;
+            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23FF3B30' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: #FF3B30;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #E53530;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* 结果卡片 */
+        .result-card {
+            margin: 0 16px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: none;
+        }
+
+        .result-card.show {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            background: linear-gradient(135deg, #FF3B30 0%, #FF6B6B 100%);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .fortune-level {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .result-body {
+            padding: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-item h4 {
+            color: #FF3B30;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-item p {
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tag-lucky {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .tag-warning {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .bazi-display {
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE5E5 100%);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .bazi-display h4 {
+            color: #FF3B30;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .bazi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .bazi-item {
+            background: white;
+            padding: 10px 6px;
+            border-radius: 8px;
+        }
+
+        .bazi-item .label {
+            font-size: 11px;
+            color: #999999;
+            margin-bottom: 4px;
+        }
+
+        .bazi-item .value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* 底部安全提示 */
+        .footer-notice {
+            margin: 20px 16px;
+            padding: 12px 16px;
+            background: #FFF9E6;
+            border-left: 4px solid #FFC107;
+            border-radius: 8px;
+        }
+
+        .footer-notice p {
+            font-size: 12px;
+            color: #856404;
+            line-height: 1.5;
+        }
+
+        /* 返回首页按钮 */
+        .back-to-cover {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #FF3B30;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-cover:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(255, 59, 48, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 封面页面 -->
+        <div class="cover-page" id="coverPage">
+            <div class="cover-container">
+                <!-- 提示文字 -->
+                <div class="cover-hint">✨ 请选择您的生肖 ✨</div>
+
+                <!-- 顶部装饰图片 -->
+                <div class="cover-top-image"></div>
+
+                <!-- 生肖图片 -->
+                <div class="cover-zodiac-image"></div>
+
+                <!-- 生肖按钮覆盖层 -->
+                <div class="zodiac-buttons-overlay">
+                    <div class="zodiac-btn-grid">
+                        <button class="zodiac-click-btn" data-zodiac="鼠" data-year="1996" data-icon="🐭" data-theme="子鼠灵动 · 智慧出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="牛" data-year="1997" data-icon="🐮" data-theme="丑牛勤勉 · 稳健出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="虎" data-year="1998" data-icon="🐯" data-theme="寅虎威猛 · 勇敢出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="兔" data-year="1999" data-icon="🐰" data-theme="卯兔温和 · 顺遂出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="龙" data-year="2000" data-icon="🐲" data-theme="辰龙腾飞 · 昂扬出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="蛇" data-year="2001" data-icon="🐍" data-theme="巳蛇灵动 · 机智出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="马" data-year="1990" data-icon="🐴" data-theme="午马奔腾 · 马到功成"></button>
+                        <button class="zodiac-click-btn" data-zodiac="羊" data-year="1991" data-icon="🐐" data-theme="未羊温顺 · 平安出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="猴" data-year="1992" data-icon="🐵" data-theme="申猴机智 · 灵动出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="鸡" data-year="1993" data-icon="🐔" data-theme="酉鸡勤鸣 · 守时出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="狗" data-year="1994" data-icon="🐶" data-theme="戌狗忠诚 · 安稳出行"></button>
+                        <button class="zodiac-click-btn" data-zodiac="猪" data-year="1995" data-icon="🐷" data-theme="亥猪福泽 · 亨通出行"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 测算页面 -->
+        <div class="main-page" id="mainPage">
+            <div class="nav-header">
+                <h1><span class="zodiac-icon" id="navZodiacIcon">🐴</span> <span id="navTitle">出行风水测算</span></h1>
+            </div>
+
+            <div class="theme-banner" id="themeBanner" data-zodiac="🐴">
+                <h2 id="themeTitle">午马奔腾 · 马到功成</h2>
+                <p id="themeSubtitle">传统易学智慧 × 现代出行指南</p>
+            </div>
+
+            <form id="fortuneForm" class="form-section">
+                <div class="form-title">基本信息</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="birthDate">📅 出生日期</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthTime">🕐 出生时辰</label>
+                        <select id="birthTime" required>
+                            <option value="">请选择</option>
+                            <option value="zi">子时 (23:00-01:00)</option>
+                            <option value="chou">丑时 (01:00-03:00)</option>
+                            <option value="yin">寅时 (03:00-05:00)</option>
+                            <option value="mao">卯时 (05:00-07:00)</option>
+                            <option value="chen">辰时 (07:00-09:00)</option>
+                            <option value="si">巳时 (09:00-11:00)</option>
+                            <option value="wu">午时 (11:00-13:00)</option>
+                            <option value="wei">未时 (13:00-15:00)</option>
+                            <option value="shen">申时 (15:00-17:00)</option>
+                            <option value="you">酉时 (17:00-19:00)</option>
+                            <option value="xu">戌时 (19:00-21:00)</option>
+                            <option value="hai">亥时 (21:00-23:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-title" style="margin-top: 24px;">出行信息</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="travelDate">🚀 出行日期</label>
+                        <input type="date" id="travelDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelTime">⏰ 出行时辰</label>
+                        <select id="travelTime">
+                            <option value="">不限</option>
+                            <option value="zi">子时 (23:00-01:00)</option>
+                            <option value="chou">丑时 (01:00-03:00)</option>
+                            <option value="yin">寅时 (03:00-05:00)</option>
+                            <option value="mao">卯时 (05:00-07:00)</option>
+                            <option value="chen">辰时 (07:00-09:00)</option>
+                            <option value="si">巳时 (09:00-11:00)</option>
+                            <option value="wu">午时 (11:00-13:00)</option>
+                            <option value="wei">未时 (13:00-15:00)</option>
+                            <option value="shen">申时 (15:00-17:00)</option>
+                            <option value="you">酉时 (17:00-19:00)</option>
+                            <option value="xu">戌时 (19:00-21:00)</option>
+                            <option value="hai">亥时 (21:00-23:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">🎯 目的地</label>
+                    <input type="text" id="destination" placeholder="请输入目的地城市或方位（如：北京、东方）" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="travelMode">🚗 出行方式</label>
+                    <select id="travelMode" required>
+                        <option value="">请选择</option>
+                        <option value="car">🚗 自驾</option>
+                        <option value="train">🚄 火车/高铁</option>
+                        <option value="plane">✈️ 飞机</option>
+                        <option value="bus">🚌 大巴</option>
+                        <option value="ship">⛴️ 轮船</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <span>🔮</span>
+                    <span>开始测算</span>
+                </button>
+            </form>
+
+            <!-- 结果卡片 -->
+            <div id="result" class="result-card">
+                <div class="result-header">
+                    <div class="score-circle" id="scoreCircle">0</div>
+                    <div class="fortune-level" id="fortuneLevel">测算结果</div>
+                </div>
+
+                <div class="result-body">
+                    <div class="bazi-display">
+                        <h4>📊 您的八字命盘</h4>
+                        <div class="bazi-grid">
+                            <div class="bazi-item">
+                                <div class="label">年柱</div>
+                                <div class="value" id="yearPillar">--</div>
+                            </div>
+                            <div class="bazi-item">
+                                <div class="label">月柱</div>
+                                <div class="value" id="monthPillar">--</div>
+                            </div>
+                            <div class="bazi-item">
+                                <div class="label">日柱</div>
+                                <div class="value" id="dayPillar">--</div>
+                            </div>
+                            <div class="bazi-item">
+                                <div class="label">时柱</div>
+                                <div class="value" id="hourPillar">--</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>📈 综合分析</h4>
+                        <p id="overallAnalysis">详细分析内容...</p>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>✨ 吉祥要素</h4>
+                        <div class="tag-container" id="luckyItems"></div>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>⚠️ 注意事项</h4>
+                        <div id="warnings"></div>
+                    </div>
+
+                    <div class="info-item">
+                        <h4>💡 出行建议</h4>
+                        <p id="suggestions">个性化建议...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部提示 -->
+            <div class="footer-notice">
+                <p>⚠️ 本测算仅供娱乐参考，请理性对待</p>
+                <p>出行安全第一，请遵守交通规则</p>
+            </div>
+        </div>
+
+        <!-- 返回首页按钮 -->
+        <div class="back-to-cover" id="backToCover" style="display: none;">
+            🏠
+        </div>
+    </div>
+
+    <script>
+        // 天干地支数据
+        const tianGan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        const diZhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+        const wuXing = {
+            '甲': '木', '乙': '木', '丙': '火', '丁': '火', '戊': '土',
+            '己': '土', '庚': '金', '辛': '金', '壬': '水', '癸': '水'
+        };
+        const diZhiWuXing = {
+            '子': '水', '丑': '土', '寅': '木', '卯': '木', '辰': '土',
+            '巳': '火', '午': '火', '未': '土', '申': '金', '酉': '金',
+            '戌': '土', '亥': '水'
+        };
+
+        // 五行生克关系
+        const wuXingSheng = {
+            '木': '火', '火': '土', '土': '金', '金': '水', '水': '木'
+        };
+        const wuXingKe = {
+            '木': '土', '土': '水', '水': '火', '火': '金', '金': '木'
+        };
+
+        // 方位与五行对应
+        const fangWeiWuXing = {
+            '东': '木', '南': '火', '西': '金', '北': '水',
+            '中': '土', '东北': '土', '东南': '木', '西南': '土', '西北': '金'
+        };
+
+        // 城市方位映射（简化版）
+        const cityDirection = {
+            '北京': '北', '上海': '东', '广州': '南', '深圳': '南',
+            '成都': '西', '重庆': '西', '西安': '西', '武汉': '中',
+            '杭州': '东', '南京': '东', '天津': '北', '苏州': '东'
+        };
+
+        // 计算日期的天干地支
+        function getGanZhi(date) {
+            const baseDate = new Date('1900-01-01');
+            const daysDiff = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
+
+            // 日干支（简化算法）
+            const dayGanIndex = (daysDiff + 10) % 10;
+            const dayZhiIndex = (daysDiff + 1) % 12;
+
+            // 月干支（简化算法）
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const monthGanIndex = (year % 10 + month) % 10;
+            const monthZhiIndex = (month + 1) % 12;
+
+            // 年干支
+            const yearGanIndex = (year - 4) % 10;
+            const yearZhiIndex = (year - 4) % 12;
+
+            return {
+                year: { gan: tianGan[yearGanIndex], zhi: diZhi[yearZhiIndex] },
+                month: { gan: tianGan[monthGanIndex], zhi: diZhi[monthZhiIndex] },
+                day: { gan: tianGan[dayGanIndex], zhi: diZhi[dayZhiIndex] }
+            };
+        }
+
+        // 计算八字
+        function calculateBaZi(birthDate, birthTime) {
+            const ganZhi = getGanZhi(new Date(birthDate));
+            const timeZhiMap = {
+                'zi': 0, 'chou': 1, 'yin': 2, 'mao': 3, 'chen': 4, 'si': 5,
+                'wu': 6, 'wei': 7, 'shen': 8, 'you': 9, 'xu': 10, 'hai': 11
+            };
+
+            // 日干确定时干（简化算法）
+            const dayGanIndex = tianGan.indexOf(ganZhi.day.gan);
+            const timeGanIndex = (dayGanIndex * 2 + timeZhiMap[birthTime]) % 10;
+
+            return {
+                year: ganZhi.year,
+                month: ganZhi.month,
+                day: ganZhi.day,
+                time: { gan: tianGan[timeGanIndex], zhi: diZhi[timeZhiMap[birthTime]] }
+            };
+        }
+
+        // 获取五行属性
+        function getWuXing(ganZhi) {
+            const ganXing = wuXing[ganZhi.gan];
+            const zhiXing = diZhiWuXing[ganZhi.zhi];
+            return { gan: ganXing, zhi: zhiXing };
+        }
+
+        // 判断五行生克
+        function judgeWuXingRelation(xing1, xing2) {
+            if (wuXingSheng[xing1] === xing2) return '生';
+            if (wuXingSheng[xing2] === xing1) return '被生';
+            if (wuXingKe[xing1] === xing2) return '克';
+            if (wuXingKe[xing2] === xing1) return '被克';
+            return '比和';
+        }
+
+        // 计算方位吉凶
+        function calculateDirectionLuck(baZi, direction) {
+            const dayXing = getWuXing(baZi.day);
+            const directionXing = fangWeiWuXing[direction] || '土';
+
+            const relation = judgeWuXingRelation(dayXing.gan, directionXing);
+
+            let score = 50;
+            let analysis = '';
+
+            switch (relation) {
+                case '生':
+                    score = 85;
+                    analysis = `您的日干${dayXing.gan}生${directionXing}，向此方位出行利于发挥才能，事事顺遂。`;
+                    break;
+                case '被生':
+                    score = 90;
+                    analysis = `您的日干${dayXing.gan}被${directionXing}所生，此方位对您有助益之力，出行大吉。`;
+                    break;
+                case '克':
+                    score = 70;
+                    analysis = `您的日干${dayXing.gan}克${directionXing}，此方位出行可以掌控局面，但需要主动出击。`;
+                    break;
+                case '被克':
+                    score = 55;
+                    analysis = `您的日干${dayXing.gan}被${directionXing}所克，此方位出行可能遇到阻力，需要谨慎。`;
+                    break;
+                default:
+                    score = 75;
+                    analysis = `您的日干${dayXing.gan}与${directionXing}比和，此方位出行平稳，无功无过。`;
+            }
+
+            return { score, analysis, relation };
+        }
+
+        // 计算日期吉凶
+        function calculateDateLuck(baZi, travelDate) {
+            const travelGanZhi = getGanZhi(new Date(travelDate));
+            const dayXing = getWuXing(baZi.day);
+            const travelDayXing = getWuXing(travelGanZhi.day);
+
+            const relation = judgeWuXingRelation(dayXing.gan, travelDayXing.gan);
+
+            let score = 50;
+            let analysis = '';
+            let isLucky = false;
+
+            if (relation === '被生' || relation === '生') {
+                score = 80;
+                isLucky = true;
+                analysis = `出行日${travelGanZhi.day.gan}${travelGanZhi.day.zhi}与您的日柱${baZi.day.gan}${baZi.day.zhi}相生，此日出行吉利。`;
+            } else if (relation === '克') {
+                score = 70;
+                analysis = `出行日${travelGanZhi.day.gan}${travelGanZhi.day.zhi}被您的日柱所克，此日出行需要主动，可以达成目标。`;
+            } else if (relation === '被克') {
+                score = 55;
+                analysis = `出行日${travelGanZhi.day.gan}${travelGanZhi.day.zhi}克您的日柱，此日出行宜低调，避免冲突。`;
+            } else {
+                score = 65;
+                analysis = `出行日${travelGanZhi.day.gan}${travelGanZhi.day.zhi}与您的日柱比和，此日出行平稳。`;
+            }
+
+            // 冲煞判断
+            const chongGuan = ['子午冲', '丑未冲', '寅申冲', '卯酉冲', '辰戌冲', '巳亥冲'];
+            const hasChong = chongGuan.some(chong => {
+                const [z1, z2] = chong.replace('冲', '').split('');
+                return (baZi.day.zhi === z1 && travelGanZhi.day.zhi === z2) ||
+                       (baZi.day.zhi === z2 && travelGanZhi.day.zhi === z1);
+            });
+
+            if (hasChong) {
+                score -= 15;
+                analysis += ' 日支相冲，出行需特别注意安全。';
+            }
+
+            return { score, analysis, isLucky, hasChong };
+        }
+
+        // 计算时辰吉凶
+        function calculateTimeLuck(baZi, travelTime) {
+            if (!travelTime) {
+                return { score: 70, analysis: '未选择具体时辰，建议选择上午时辰出行。' };
+            }
+
+            const timeZhiMap = {
+                'zi': '子', 'chou': '丑', 'yin': '寅', 'mao': '卯',
+                'chen': '辰', 'si': '巳', 'wu': '午', 'wei': '未',
+                'shen': '申', 'you': '酉', 'xu': '戌', 'hai': '亥'
+            };
+
+            const travelZhi = timeZhiMap[travelTime];
+            const dayXing = getWuXing(baZi.day);
+            const travelZhiXing = diZhiWuXing[travelZhi];
+
+            const relation = judgeWuXingRelation(dayXing.gan, travelZhiXing);
+
+            let score = 50;
+            let analysis = '';
+
+            if (relation === '被生') {
+                score = 85;
+                analysis = `${travelZhi}时出行，时辰助您，事半功倍。`;
+            } else if (relation === '生') {
+                score = 75;
+                analysis = `${travelZhi}时出行，您需要主动出击，可以掌控局面。`;
+            } else if (relation === '被克') {
+                score = 55;
+                analysis = `${travelZhi}时出行可能遇到阻力，建议调整时间。`;
+            } else {
+                score = 65;
+                analysis = `${travelZhi}时出行平稳。`;
+            }
+
+            // 三冲判断
+            const sanChong = {
+                '子': '午', '丑': '未', '寅': '申', '卯': '酉',
+                '辰': '戌', '巳': '亥', '午': '子', '未': '丑',
+                '申': '寅', '酉': '卯', '戌': '辰', '亥': '巳'
+            };
+
+            if (baZi.day.zhi === sanChong[travelZhi]) {
+                score -= 10;
+                analysis += ' 时辰与日支相冲，需谨慎。';
+            }
+
+            return { score, analysis };
+        }
+
+        // 计算出行方式适配度
+        function calculateTravelModeLuck(baZi, travelMode) {
+            const dayXing = getWuXing(baZi.day);
+            const modeWuXing = {
+                'car': '金',
+                'train': '金',
+                'plane': '金',
+                'bus': '土',
+                'ship': '水'
+            };
+
+            const modeXing = modeWuXing[travelMode];
+            const relation = judgeWuXingRelation(dayXing.gan, modeXing);
+
+            let score = 70;
+            let analysis = '';
+
+            if (relation === '被生' || relation === '生') {
+                score = 85;
+                analysis = `您选择的出行方式与您的命理相合，出行顺利。`;
+            } else if (relation === '被克') {
+                score = 60;
+                analysis = `此出行方式可能不太适合您，建议考虑其他方式。`;
+            } else {
+                score = 70;
+                analysis = `此出行方式与您的命理无明显冲突。`;
+            }
+
+            return { score, analysis };
+        }
+
+        // 主测算函数
+        function calculateFortune(formData) {
+            const baZi = calculateBaZi(formData.birthDate, formData.birthTime);
+
+            // 判断方位
+            let direction = formData.destination;
+            for (const city in cityDirection) {
+                if (formData.destination.includes(city)) {
+                    direction = cityDirection[city];
+                    break;
+                }
+            }
+            if (!fangWeiWuXing[direction]) {
+                for (const fw in fangWeiWuXing) {
+                    if (formData.destination.includes(fw)) {
+                        direction = fw;
+                        break;
+                    }
+                }
+            }
+            if (!fangWeiWuXing[direction]) {
+                direction = '中';
+            }
+
+            // 计算各项得分
+            const directionLuck = calculateDirectionLuck(baZi, direction);
+            const dateLuck = calculateDateLuck(baZi, formData.travelDate);
+            const timeLuck = calculateTimeLuck(baZi, formData.travelTime);
+            const modeLuck = calculateTravelModeLuck(baZi, formData.travelMode);
+
+            // 综合评分（加权平均）
+            const totalScore = Math.round(
+                directionLuck.score * 0.3 +
+                dateLuck.score * 0.3 +
+                timeLuck.score * 0.2 +
+                modeLuck.score * 0.2
+            );
+
+            // 确定吉凶等级
+            let level, levelClass;
+            if (totalScore >= 85) {
+                level = '大吉 · 万事如意';
+                levelClass = 'excellent';
+            } else if (totalScore >= 75) {
+                level = '中吉 · 顺遂安康';
+                levelClass = 'good';
+            } else if (totalScore >= 60) {
+                level = '平吉 · 谨慎为宜';
+                levelClass = 'average';
+            } else {
+                level = '凶险 · 不宜出行';
+                levelClass = 'poor';
+            }
+
+            // 生成吉祥要素
+            const luckyItems = [];
+            if (directionLuck.relation === '被生' || directionLuck.relation === '生') {
+                luckyItems.push(`${direction}方助您`);
+            }
+            if (dateLuck.isLucky) {
+                luckyItems.push('出行日吉利');
+            }
+            if (timeLuck.score >= 75) {
+                luckyItems.push('时辰适宜');
+            }
+            if (modeLuck.score >= 80) {
+                luckyItems.push('出行方式合命');
+            }
+
+            // 生成注意事项
+            const warnings = [];
+            if (directionLuck.score < 65) {
+                warnings.push('目的地方位与您的命理不合，建议调整目的地或做好心理准备');
+            }
+            if (dateLuck.hasChong) {
+                warnings.push('出行日与您的日柱相冲，需特别注意交通安全');
+            }
+            if (timeLuck.score < 60) {
+                warnings.push('选择的时辰不太理想，建议改为上午时段');
+            }
+            if (warnings.length === 0) {
+                warnings.push('出行条件良好，注意常规安全事项即可');
+            }
+
+            // 生成建议
+            let suggestions = `根据您的八字分析，您日主为${baZi.day.gan}${baZi.day.zhi}，五行属性为${getWuXing(baZi.day).gan}。`;
+
+            if (levelClass === 'excellent' || levelClass === 'good') {
+                suggestions += ' 此次出行条件优越，可以放心出行，建议把握良机，大胆行动。';
+            } else if (levelClass === 'average') {
+                suggestions += ' 此次出行条件一般，建议保持低调，做好充分准备，遇事冷静处理。';
+            } else {
+                suggestions += ' 此次出行条件不佳，如非必要建议推迟或改期。如必须出行，请务必小心谨慎，注意安全。';
+            }
+
+            return {
+                totalScore,
+                level,
+                levelClass,
+                details: {
+                    direction: { ...directionLuck, direction },
+                    date: dateLuck,
+                    time: timeLuck,
+                    mode: modeLuck
+                },
+                luckyItems,
+                warnings,
+                suggestions,
+                baZi
+            };
+        }
+
+        // ==================== 页面交互逻辑 ====================
+
+        let selectedZodiac = null;
+
+        // 封面页生肖选择
+        document.querySelectorAll('.zodiac-click-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const zodiac = this.dataset.zodiac;
+                const year = this.dataset.year;
+                const icon = this.dataset.icon;
+                const theme = this.dataset.theme;
+
+                selectedZodiac = { zodiac, year, icon, theme };
+
+                // 更新主题
+                document.getElementById('navZodiacIcon').textContent = icon;
+                document.getElementById('themeBanner').setAttribute('data-zodiac', icon);
+                document.getElementById('themeTitle').textContent = theme;
+
+                // 自动填充出生年份
+                const date = new Date(year, 0, 1);
+                document.getElementById('birthDate').valueAsDate = date;
+
+                // 立即进入测算页面
+                setTimeout(() => {
+                    enterMainPage();
+                }, 300);
+            });
+        });
+
+        // 进入测算页面
+        function enterMainPage() {
+            coverPage.classList.add('hidden');
+            document.getElementById('mainPage').classList.add('show');
+            document.getElementById('backToCover').style.display = 'flex';
+        }
+
+        // 返回封面
+        document.getElementById('backToCover').addEventListener('click', function() {
+            coverPage.classList.remove('hidden');
+            document.getElementById('mainPage').classList.remove('show');
+            this.style.display = 'none';
+
+            // 重置选择
+            selectedZodiac = null;
+            document.querySelectorAll('.zodiac-btn').forEach(btn => {
+                btn.style.transform = '';
+                btn.style.boxShadow = '';
+            });
+        });
+
+        // 表单提交
+        document.getElementById('fortuneForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                birthDate: document.getElementById('birthDate').value,
+                birthTime: document.getElementById('birthTime').value,
+                travelDate: document.getElementById('travelDate').value,
+                travelTime: document.getElementById('travelTime').value,
+                destination: document.getElementById('destination').value,
+                travelMode: document.getElementById('travelMode').value
+            };
+
+            const result = calculateFortune(formData);
+
+            // 显示结果
+            document.getElementById('scoreCircle').textContent = result.totalScore;
+            document.getElementById('fortuneLevel').textContent = result.level;
+            document.getElementById('fortuneLevel').className = 'fortune-level ' + result.levelClass;
+
+            // 显示八字
+            document.getElementById('yearPillar').textContent =
+                result.baZi.year.gan + result.baZi.year.zhi;
+            document.getElementById('monthPillar').textContent =
+                result.baZi.month.gan + result.baZi.month.zhi;
+            document.getElementById('dayPillar').textContent =
+                result.baZi.day.gan + result.baZi.day.zhi;
+            document.getElementById('hourPillar').textContent =
+                result.baZi.time.gan + result.baZi.time.zhi;
+
+            document.getElementById('overallAnalysis').innerHTML = `
+                <strong>🎯 方位分析：</strong>${result.details.direction.analysis}<br><br>
+                <strong>📅 日期分析：</strong>${result.details.date.analysis}<br><br>
+                <strong>⏰ 时辰分析：</strong>${result.details.time.analysis}<br><br>
+                <strong>🚗 出行方式：</strong>${result.details.mode.analysis}
+            `;
+
+            // 显示吉祥要素
+            const luckyDiv = document.getElementById('luckyItems');
+            luckyDiv.innerHTML = result.luckyItems.map(item =>
+                `<span class="tag tag-lucky">✓ ${item}</span>`
+            ).join('');
+
+            // 显示注意事项
+            const warningsDiv = document.getElementById('warnings');
+            warningsDiv.innerHTML = result.warnings.map(warning =>
+                `<p style="margin-bottom: 8px;">⚠️ ${warning}</p>`
+            ).join('');
+
+            document.getElementById('suggestions').textContent = result.suggestions;
+
+            // 显示结果区域
+            document.getElementById('result').classList.add('show');
+
+            // 滚动到结果区域
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // 设置默认日期
+        const today = new Date();
+        document.getElementById('travelDate').valueAsDate = today;
+        document.getElementById('travelDate').min = today.toISOString().split('T')[0];
+    </script>
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品机会深度挖掘报告</title>
+    <style>
+        body {
+            font-family: 'Arial', '宋体', sans-serif;
+            line-height: 1.8;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1F4E78;
+            font-size: 28pt;
+            text-align: center;
+            border-bottom: 5px solid #1F4E78;
+            padding-bottom: 25px;
+            margin-bottom: 20px;
+        }
+        .report-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 11pt;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #2E5C8A;
+            font-size: 22pt;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 6px solid #2E5C8A;
+            background: linear-gradient(90deg, #E7F3FF 0%, transparent 100%);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        h3 {
+            color: #385723;
+            font-size: 17pt;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            color: #D9534F;
+            font-size: 14pt;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+        .opportunity-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 6px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .blue-ocean {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-left: 6px solid #28A745;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .red-ocean {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-left: 6px solid #DC3545;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .hidden-gem {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-left: 6px solid #FFC107;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 11pt;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #CCCCCC;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+        tr:hover {
+            background-color: #E7F3FF;
+        }
+        .score-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12pt;
+            margin: 3px;
+        }
+        .score-high {
+            background-color: #28A745;
+            color: white;
+        }
+        .score-medium {
+            background-color: #FFC107;
+            color: black;
+        }
+        .score-low {
+            background-color: #DC3545;
+            color: white;
+        }
+        .category-tag {
+            display: inline-block;
+            background-color: #E7F3FF;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 4px;
+            font-size: 10pt;
+            border: 2px solid #B3D9FF;
+            font-weight: bold;
+        }
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .action-card {
+            background-color: #F8F9FA;
+            border: 2px solid #DEE2E6;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .stat-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .circle-high {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .circle-medium {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .circle-low {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .matrix-table {
+            font-size: 10pt;
+        }
+        .matrix-table th {
+            padding: 10px;
+        }
+        .matrix-table td {
+            padding: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 3px solid #CCCCCC;
+            color: #666;
+            font-size: 10pt;
+        }
+        .emoji {
+            font-size: 16pt;
+        }
+        .highlight-text {
+            background-color: #FFF3CD;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💎 商品机会深度挖掘报告</h1>
+
+        <div class="report-info">
+            <p><strong>报告生成时间:</strong> 2025年2月20日</p>
+            <p><strong>分析范围:</strong> 商品机会(关键词、精选、商品、新品) vs 各类榜单数据</p>
+            <p><strong>分析目标:</strong> 挖掘高潜力、低竞争的蓝海商品机会</p>
+            <p><strong>数据周期:</strong> 2025年1月15日-2月13日(28天)</p>
+        </div>
+
+        <h2>一、商品机会全景分析</h2>
+
+        <h3>1.1 四类商品机会概览</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>机会类型</th>
+                    <th>记录数量</th>
+                    <th>主要特征</th>
+                    <th>代表品类</th>
+                    <th>潜力评级</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>关键词机会</strong></td>
+                    <td>619条</td>
+                    <td>高搜索量(2,500-3,200次/天),平台推荐</td>
+                    <td>珠宝饰品、智能手表、美发产品</td>
+                    <td><span class="score-badge score-high">高</span></td>
+                </tr>
+                <tr>
+                    <td><strong>精选机会</strong></td>
+                    <td>中等</td>
+                    <td>平台精选商品,销量数据明确</td>
+                    <td>钥匙扣、饰品配件、小商品</td>
+                    <td><span class="score-badge score-medium">中</span></td>
+                </tr>
+                <tr>
+                    <td><strong>商品机会</strong></td>
+                    <td>大量</td>
+                    <td>品类丰富,覆盖面广</td>
+                    <td>发饰品、帽子、围巾、眼镜</td>
+                    <td><span class="score-badge score-high">高</span></td>
+                </tr>
+                <tr>
+                    <td><strong>新品机会</strong></td>
+                    <td>较少</td>
+                    <td>新上市商品,创新性强</td>
+                    <td>项链、手链、发夹、配饰</td>
+                    <td><span class="score-badge score-medium">中</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>1.2 商品机会品类分布</h3>
+
+        <div class="opportunity-card">
+            <h4>📊 品类分布统计(基于精选机会):</h4>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                <div class="category-tag" style="font-size: 14pt;">🔗 发饰类 (Dây) - 14款</div>
+                <div class="category-tag" style="font-size: 14pt;">🔑 钥匙扣 (Móc) - 12款</div>
+                <div class="category-tag" style="font-size: 14pt;">💍 手链/项链 (Vòng) - 6款</div>
+                <div class="category-tag" style="font-size: 14pt;">👜 包包类 (Túi) - 5款</div>
+                <div class="category-tag" style="font-size: 14pt;">🌸 花饰 (Hoa) - 5款</div>
+                <div class="category-tag" style="font-size: 14pt;">🧢 帽子 (Mũ) - 3款</div>
+                <div class="category-tag" style="font-size: 14pt;">🎀 套装 (Set) - 2款</div>
+            </div>
+            <p style="margin-top: 20px;"><strong>核心发现:</strong> <span class="highlight-text">发饰类和钥匙扣类商品机会最多</span>,说明这些是小商品、高复购、低门槛的品类。</p>
+        </div>
+
+        <h2>二、高潜力商品机会识别</h2>
+
+        <h3>2.1 蓝海机会矩阵分析</h3>
+
+        <div class="blue-ocean">
+            <h4>🌊 蓝海机会(高需求 + 低竞争)</h4>
+            <p>以下商品在商品机会中有较高表现,但在榜单中出现较少,代表<strong>未被充分开发的机会</strong>:</p>
+        </div>
+
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>商品名称</th>
+                    <th>机会来源</th>
+                    <th>搜索/销量</th>
+                    <th>榜单表现</th>
+                    <th>机会评级</th>
+                    <th>原因分析</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Móc Khóa Babythree</strong><br>(可爱钥匙扣)</td>
+                    <td>新品机会</td>
+                    <td>新品上架</td>
+                    <td>❌ 榜单未出现</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                    <td>IP形象商品,定制化强,市场空白</td>
+                </tr>
+                <tr>
+                    <td><strong>Bờm tóc nữ tone pastel</strong><br>(淡色发箍)</td>
+                    <td>商品机会</td>
+                    <td>多色可选</td>
+                    <td>⚠️ 榜单少</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                    <td>韩式风格,低竞争,趋势上升</td>
+                </tr>
+                <tr>
+                    <td><strong>Set 6 dây buộc tóc lò xo</strong><br>(6件套弹簧发绳)</td>
+                    <td>商品机会</td>
+                    <td>套装销售</td>
+                    <td>❌ 榜单未出现</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                    <td>套装模式提高客单价,差异化明显</td>
+                </tr>
+                <tr>
+                    <td><strong>Mũ Beret Nữ</strong><br>(女式贝雷帽)</td>
+                    <td>商品机会</td>
+                    <td>多色可选</td>
+                    <td>⚠️ 榜单少</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                    <td>复古风潮,季节性强,竞争低</td>
+                </tr>
+                <tr>
+                    <td><strong>Kẹp Tóc Dạng Nơ</strong><br>(蝴蝶结发夹)</td>
+                    <td>新品机会</td>
+                    <td>新品上架</td>
+                    <td>❌ 榜单未出现</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                    <td>甜可爱风格,年轻群体需求大</td>
+                </tr>
+                <tr>
+                    <td><strong>Vòng tay gỗ Bách xanh</strong><br>(柏木手链)</td>
+                    <td>新品机会</td>
+                    <td>天然材质</td>
+                    <td>❌ 榜单未出现</td>
+                    <td><span class="score-badge score-medium">⭐⭐⭐</span></td>
+                    <td>佛教文化,天然材质,小众市场</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="hidden-gem">
+            <h4>💎 隐藏宝石机会(小众但高价值)</h4>
+            <ul>
+                <li><strong>Móc Khúa Babythree</strong> - IP形象定制化商品,受众精准</li>
+                <li><strong>Vòng tay gỗ Bách xanh</strong> - 宗教文化需求,忠诚度高</li>
+                <li><strong>Dây Chuyen Dài Nhiều Lớp Giả Ngọc Trai</strong> - 复古多层项链,时尚单品</li>
+            </ul>
+        </div>
+
+        <h3>2.2 红海品类(高竞争)</h3>
+
+        <div class="red-ocean">
+            <h4>⚠️ 红海品类(高需求 + 高竞争 - 谨慎进入)</h4>
+            <p>以下品类在商品机会和榜单中都大量出现,竞争激烈:</p>
+        </div>
+
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>品类</th>
+                    <th>商品机会中</th>
+                    <th>榜单中</th>
+                    <th>竞争程度</th>
+                    <th>建议</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>美发产品</strong><br>(洗发、染发、护发)</td>
+                    <td>✅ 大量</td>
+                    <td>✅ 大量(泡沫染发#1)</td>
+                    <td><span class="score-badge score-low">极高</span></td>
+                    <td>需要差异化定位</td>
+                </tr>
+                <tr>
+                    <td><strong>护肤品</strong><br>(精华、面膜)</td>
+                    <td>✅ 大量</td>
+                    <td>✅ 大量(黑Ginseng#3)</td>
+                    <td><span class="score-badge score-low">极高</span></td>
+                    <td>功效明确才能突围</td>
+                </tr>
+                <tr>
+                    <td><strong>家居清洁</strong><br>(清洁剂、保养)</td>
+                    <td>✅ 中等</td>
+                    <td>✅ 大量(蜂蜡木油#2)</td>
+                    <td><span class="score-badge score-medium">高</span></td>
+                    <td>垂直细分有机会</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>三、新兴趋势识别</h2>
+
+        <h3>3.1 品类趋势矩阵</h3>
+
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 30px 0;">
+            <div class="stat-circle circle-high">
+                <div style="font-size: 24pt;">🔥</div>
+                <div style="font-size: 14pt; margin-top: 10px;">上升趋势</div>
+                <div style="font-size: 12pt; margin-top: 5px;">韩式发饰</div>
+                <div style="font-size: 12pt;">贝雷帽</div>
+                <div style="font-size: 12pt;">IP形象商品</div>
+            </div>
+            <div class="stat-circle circle-medium">
+                <div style="font-size: 24pt;">📈</div>
+                <div style="font-size: 14pt; margin-top: 10px;">稳定增长</div>
+                <div style="font-size: 12pt; margin-top: 5px;">天然材质饰品</div>
+                <div style="font-size: 12pt;">套装模式</div>
+                <div style="font-size: 12pt;">复古风格</div>
+            </div>
+            <div class="stat-circle circle-low">
+                <div style="font-size: 24pt;">⚡</div>
+                <div style="font-size: 14pt; margin-top: 10px;">突发机会</div>
+                <div style="font-size: 12pt; margin-top: 5px;">淡色系配饰</div>
+                <div style="font-size: 12pt;">多层项链</div>
+                <div style="font-size: 12pt;">定制化商品</div>
+            </div>
+        </div>
+
+        <h3>3.2 价格段机会分析</h3>
+
+        <div class="opportunity-card">
+            <h4>💰 价格段机会矩阵:</h4>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>价格段</th>
+                        <th>商品机会中的商品</th>
+                        <th>榜单竞争度</th>
+                        <th>机会评级</th>
+                        <th>策略建议</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>低价位</strong><br>(<50K₫)</td>
+                        <td>钥匙扣、发绳、小配饰</td>
+                        <td>中等</td>
+                        <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                        <td>走量为主,组合销售</td>
+                    </tr>
+                    <tr>
+                        <td><strong>中低价位</strong><br>(50K-200K₫)</td>
+                        <td>发箍、发夹、贝雷帽</td>
+                        <td>低</td>
+                        <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                        <td><strong>最佳机会区间</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>中价位</strong><br>(200K-500K₫)</td>
+                        <td>饰品套装、钥匙包</td>
+                        <td>中等</td>
+                        <td><span class="score-badge score-medium">⭐⭐⭐</span></td>
+                        <td>需要品牌或品质背书</td>
+                    </tr>
+                    <tr>
+                        <td><strong>高价位</strong><br>(>500K₫)</td>
+                        <td>品牌饰品、高端钥匙包</td>
+                        <td>高</td>
+                        <td><span class="score-badge score-low">⭐⭐</span></td>
+                        <td>谨慎进入,需要差异化</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px;"><strong>💡 核心发现:</strong> <span class="highlight-text">50K-200K₫区间是最佳机会区间</span>,竞争低且有足够利润空间。</p>
+        </div>
+
+        <h2>四、未被发现的长尾机会</h2>
+
+        <h3>4.1 长尾关键词机会</h3>
+
+        <div class="blue-ocean">
+            <h4>🔍 长尾机会(低竞争 + 潜在高价值)</h4>
+            <p>这些商品在商品机会中出现,但在榜单中几乎不存在,代表<strong>长尾蓝海机会</strong>:</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>长尾商品</th>
+                    <th>品类</th>
+                    <th>价格</th>
+                    <th>榜单出现</th>
+                    <th>机会评估</th>
+                    <th>目标人群</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Móc Khóa Babythree Dễ Thương</strong></td>
+                    <td>IP形象钥匙扣</td>
+                    <td>未知</td>
+                    <td>❌ 无</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                    <td>年轻女性、学生</td>
+                </tr>
+                <tr>
+                    <td><strong>Vòng tay gỗ Bách xanh Mộc Châu</strong></td>
+                    <td>天然材质手链</td>
+                    <td>中等</td>
+                    <td>❌ 无</td>
+                    <td><span class="score-badge score-medium">⭐⭐⭐⭐</span></td>
+                    <td>佛教信徒、自然爱好者</td>
+                </tr>
+                <tr>
+                    <td><strong>Bờm tóc nữ tone pastel</strong></td>
+                    <td>淡色发箍</td>
+                    <td>中低价</td>
+                    <td>⚠️ 极少</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                    <td>年轻女性、韩式风格</td>
+                </tr>
+                <tr>
+                    <td><strong>Set 6 dây buộc tóc lò xo</strong></td>
+                    <td>弹簧发绳套装</td>
+                    <td>中低价</td>
+                    <td>❌ 无</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                    <td>年轻女性、学生</td>
+                </tr>
+                <tr>
+                    <td><strong>Mũ Beret Nữ màu Trắng Đen</strong></td>
+                    <td>贝雷帽</td>
+                    <td>中低价</td>
+                    <td>⚠️ 极少</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐</span></td>
+                    <td>时尚女性、复古风格</td>
+                </tr>
+                <tr>
+                    <td><strong>Kẹp Tóc Dạng Nơ Cỡ Lớn</strong></td>
+                    <td>大号蝴蝶结发夹</td>
+                    <td>低价</td>
+                    <td>❌ 无</td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                    <td>年轻女性、可爱风格</td>
+                </tr>
+                <tr>
+                    <td><strong>Trâm cài tóc cô dâu hoa mai</strong></td>
+                    <td>新娘发簪</td>
+                    <td>中高价位</td>
+                    <td>❌ 无</td>
+                    <td><span class="score-badge score-medium">⭐⭐⭐⭐</span></td>
+                    <td>新娘、特定场合</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4.2 细分市场机会</h3>
+
+        <div class="action-grid">
+            <div class="action-card">
+                <h4>👧 年轻女性市场</h4>
+                <ul>
+                    <li><strong>韩式发饰:</strong> 发绳、发箍、发夹</li>
+                    <li><strong>可爱风格:</strong> 蝴蝶结、淡色系</li>
+                    <li><strong>IP形象商品:</strong> Babythree钥匙扣</li>
+                    <li><strong>套装模式:</strong> 6件套发绳</li>
+                </ul>
+                <p><strong>策略:</strong> 颜色丰富、价格亲民、社交媒体营销</p>
+            </div>
+
+            <div class="action-card">
+                <h4>🧘 佛教/养生市场</h4>
+                <ul>
+                    <li><strong>天然材质:</strong> 木手链、念珠</li>
+                    <li><strong>宗教元素:</strong> 菩提子、檀木</li>
+                    <li><strong>文化内涵:</strong> 功效说明、故事背景</li>
+                    <li><strong>定制服务:</strong> 刻字、加持</li>
+                </ul>
+                <p><strong>策略:</strong> 强调天然、文化、功效</p>
+            </div>
+
+            <div class="action-card">
+                <h4>👰 婚庆/特定场合市场</h4>
+                <ul>
+                    <li><strong>新娘饰品:</strong> 发簪、头饰</li>
+                    <li><strong>节日商品:</strong> 新年、圣诞节主题</li>
+                    <li><strong>定制服务:</strong> 名字、日期</li>
+                    <li><strong>套装销售:</strong> 完整配饰套装</li>
+                </ul>
+                <p><strong>策略:</strong> 场景化营销、情感价值</p>
+            </div>
+
+            <div class="action-card">
+                <h4>🎨 复古风格市场</h4>
+                <ul>
+                    <li><strong>贝雷帽:</strong> 多色可选</li>
+                    <li><strong>多层项链:</strong> 珍珠风格</li>
+                    <li><strong>复古眼镜:</strong> 圆框、变色镜</li>
+                    <li><strong>材质创新:</strong> 钛金属、天然石</li>
+                </ul>
+                <p><strong>策略:</strong> 风格统一、品质保证</p>
+            </div>
+        </div>
+
+        <h2>五、商品机会评分模型</h2>
+
+        <h3>5.1 机会评分卡</h3>
+
+        <div class="opportunity-card">
+            <h4>📊 商品机会评分模型(总分100分):</h4>
+            <p>基于商品机会数据和榜单表现的综合评分系统:</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>评分维度</th>
+                    <th>权重</th>
+                    <th>评分标准</th>
+                    <th>最高分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>榜单空白度</strong></td>
+                    <td>30%</td>
+                    <td>榜单无出现(30分); 榜单少(20分); 榜单多(5分)</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td><strong>价格竞争力</strong></td>
+                    <td>25%</td>
+                    <td>50K-200K₫(25分); 其他价位(15分)</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td><strong>市场需求</strong></td>
+                    <td>20%</td>
+                    <td>商品机会多(20分); 机会一般(10分)</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td><strong>差异化程度</strong></td>
+                    <td>15%</td>
+                    <td>高度差异化(15分); 一般(8分)</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td><strong>利润空间</strong></td>
+                    <td>10%</td>
+                    <td>高利润(10分); 中等(6分); 低(3分)</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5.2 应用评分模型</h3>
+
+        <div class="blue-ocean">
+            <h4>🏆 高分商品机会推荐:</h4>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>商品</th>
+                    <th>榜单空白</th>
+                    <th>价格竞争力</th>
+                    <th>市场需求</th>
+                    <th>差异化</th>
+                    <th>利润空间</th>
+                    <th>总分</th>
+                    <th>评级</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Set 6 dây buộc tóc lò xo</strong></td>
+                    <td>30 (无)</td>
+                    <td>25 (50K-200K)</td>
+                    <td>18 (高)</td>
+                    <td>12 (套装)</td>
+                    <td>8 (中)</td>
+                    <td><strong>93</strong></td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Bờm tóc nữ tone pastel</strong></td>
+                    <td>25 (极少)</td>
+                    <td>25 (50K-200K)</td>
+                    <td>17 (高)</td>
+                    <td>10 (颜色)</td>
+                    <td>8 (中)</td>
+                    <td><strong>85</strong></td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Móc Khóa Babythree</strong></td>
+                    <td>30 (无)</td>
+                    <td>15 (低价)</td>
+                    <td>15 (中)</td>
+                    <td>15 (IP)</td>
+                    <td>6 (中)</td>
+                    <td><strong>81</strong></td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Mũ Beret Nữ</strong></td>
+                    <td>25 (极少)</td>
+                    <td>25 (50K-200K)</td>
+                    <td>16 (高)</td>
+                    <td>8 (风格)</td>
+                    <td>8 (中)</td>
+                    <td><strong>82</strong></td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Kẹp Tóc Dạng Nơ</strong></td>
+                    <td>30 (无)</td>
+                    <td>25 (50K-200K)</td>
+                    <td>17 (高)</td>
+                    <td>10 (可爱)</td>
+                    <td>7 (中)</td>
+                    <td><strong>89</strong></td>
+                    <td><span class="score-badge score-high">⭐⭐⭐⭐⭐</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>六、立即可执行策略</h2>
+
+        <h3>6.1 短期策略(1-2周)</h3>
+
+        <div class="action-grid">
+            <div class="action-card" style="border-left: 5px solid #28A745;">
+                <h4>✅ 立即上架商品</h4>
+                <ol>
+                    <li><strong>Set 6 dây buộc tóc lò xo</strong> - 套装模式,差异化明显</li>
+                    <li><strong>Bờm tóc nữ tone pastel</strong> - 韩式风格,竞争低</li>
+                    <li><strong>Kẹp Tóc Dạng Nơ</strong> - 可爱风格,需求大</li>
+                    <li><strong>Móc Khóa Babythree</strong> - IP形象,定制化</li>
+                </ol>
+                <p><strong>预期:</strong> 2周内上架,3-4周开始出单</p>
+            </div>
+
+            <div class="action-card" style="border-left: 5px solid #FFC107;">
+                <h4>🔍 关键词优化</h4>
+                <ul>
+                    <li>将"tone pastel"、"lò xo"、"Babythree"等关键词融入商品标题</li>
+                    <li>参考商品机会中的描述方式</li>
+                    <li>使用"TikTok热门"、"推荐"等标签</li>
+                    <li>关注"băng đô che tóc bạc"等长尾关键词</li>
+                </ul>
+                <p><strong>预期:</strong> 1周内优化完成,搜索排名提升</p>
+            </div>
+
+            <div class="action-card" style="border-left: 5px solid #DC3545;">
+                <h4>💰 定价策略</h4>
+                <ul>
+                    <li><strong>主力区间:</strong> 50K-200K₫</li>
+                    <li><strong>套装溢价:</strong> 6件套可定价150K-200K₫</li>
+                    <li><strong>引流款:</strong> 单品定价30K-50K₫</li>
+                    <li><strong>利润款:</strong> 特色商品定价200K-500K₫</li>
+                </ul>
+                <p><strong>预期:</strong> 利润率40-60%</p>
+            </div>
+        </div>
+
+        <h3>6.2 中期策略(1-3个月)</h3>
+
+        <div class="opportunity-card">
+            <h4>📈 品类扩展计划:</h4>
+            <ol>
+                <li><strong>第1个月:</strong> 聚焦发饰类(发绳、发箍、发夹)
+                    <ul>
+                        <li>SKU数量: 20-30款</li>
+                        <li>价格区间: 30K-200K₫</li>
+                        <li>目标: 月销量500+件</li>
+                    </ul>
+                </li>
+                <li><strong>第2个月:</strong> 扩展帽子类(贝雷帽、防晒帽)
+                    <ul>
+                        <li>SKU数量: 15-20款</li>
+                        <li>价格区间: 80K-300K₫</li>
+                        <li>目标: 月销量300+件</li>
+                    </ul>
+                </li>
+                <li><strong>第3个月:</strong> 开发IP形象和定制商品
+                    <ul>
+                        <li>SKU数量: 10-15款</li>
+                        <li>价格区间: 50K-500K₫</li>
+                        <li>目标: 月销量200+件</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h3>6.3 长期策略(3-12个月)</h3>
+
+        <div class="blue-ocean">
+            <h4>🎯 品牌化路径:</h4>
+            <ol>
+                <li><strong>建立自有品牌:</strong> 从无牌到白牌再到品牌</li>
+                <li><strong>垂直细分:</strong> 成为某一细分领域的专家(如韩式发饰)</li>
+                <li><strong>供应链优化:</strong> 寻找稳定供应商,控制成本</li>
+                <li><strong>数据驱动:</strong> 持续追踪商品机会和榜单变化</li>
+                <li><strong>多渠道运营:</strong> 从单一平台到多平台布局</li>
+            </ol>
+        </div>
+
+        <h2>七、风险提示与应对</h2>
+
+        <div class="red-ocean">
+            <h4>⚠️ 主要风险:</h4>
+            <ol>
+                <li><strong>同质化风险:</strong> 成功商品容易被复制
+                    <br><strong>应对:</strong> 快速迭代,持续上新,建立品牌</li>
+                <li><strong>价格战风险:</strong> 低门槛商品容易陷入价格战
+                    <br><strong>应对:</strong> 差异化定位,提升品质,品牌溢价</li>
+                <li><strong>库存风险:</strong> 小商品种类多,库存压力大
+                    <br><strong>应对:</strong> 小批量多批次,预售模式</li>
+                <li><strong>平台政策风险:</strong> 平台规则变化影响商品流量
+                    <br><strong>应对:</strong> 多平台布局,建立私域流量</li>
+            </ol>
+        </div>
+
+        <h2>八、总结与行动清单</h2>
+
+        <div class="opportunity-card">
+            <h4>🎯 核心发现:</h4>
+            <ol>
+                <li><strong>蓝海机会丰富:</strong> 商品机会中大量商品未在榜单出现,竞争低</li>
+                <li><strong>最佳价格区间:</strong> 50K-200K₫,平衡竞争和利润</li>
+                <li><strong>品类集中度高:</strong> 发饰类和配饰类机会最多</li>
+                <li><strong>趋势明确:</strong> 韩式风格、可爱风格、复古风格上升</li>
+                <li><strong>套装模式有效:</strong> 提高客单价,差异化明显</li>
+            </ol>
+        </div>
+
+        <div class="hidden-gem">
+            <h4>✅ 立即行动清单:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>优先级</th>
+                        <th>行动项</th>
+                        <th>负责人</th>
+                        <th>完成时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="score-badge score-high">P0</span></td>
+                        <td>上架TOP5高分商品(发绳套装、发箍、发夹等)</td>
+                        <td>采购</td>
+                        <td>1周内</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-high">P0</span></td>
+                        <td>优化商品标题和关键词</td>
+                        <td>运营</td>
+                        <td>3天内</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-medium">P1</span></td>
+                        <td>制定定价策略</td>
+                        <td>财务</td>
+                        <td>3天内</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-medium">P1</span></td>
+                        <td>寻找稳定供应商</td>
+                        <td>采购</td>
+                        <td>2周内</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-medium">P1</span></td>
+                        <td>建立商品追踪系统</td>
+                        <td>技术</td>
+                        <td>1个月内</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-low">P2</span></td>
+                        <td>开发自有品牌</td>
+                        <td>品牌</td>
+                        <td>3个月内</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p><strong>报告版本:</strong> V4.0 (商品机会深度挖掘版) | <strong>生成时间:</strong> 2025年2月20日</p>
+            <p><em>本报告基于商品机会表格与榜单数据的深度关联分析,提供了可执行的选品建议和策略。</em></p>
+            <p><strong>下次更新:</strong> 建议7天后更新,追踪商品机会变化和榜单新趋势</p>
+            <p><strong>联系方式:</strong> 数据分析团队 | data@company.com</p>
+        </div>
+    </div>
+</body>
+</html>

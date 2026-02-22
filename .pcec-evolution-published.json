@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2026-02-22T08:43:09.426Z",
+    "name": "PCEC周期性认知扩展",
+    "status": "✗ FAILED",
+    "error": ""
+  },
+  {
+    "timestamp": "2026-02-22T08:43:09.426Z",
+    "name": "会话日志检测与回退",
+    "status": "✗ FAILED",
+    "error": ""
+  },
+  {
+    "timestamp": "2026-02-22T08:43:09.426Z",
+    "name": "共生策略转换",
+    "status": "✗ FAILED",
+    "error": ""
+  }
+]
