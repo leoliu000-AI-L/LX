@@ -1,0 +1,14 @@
+{
+  "config": {"wide_screen_mode": true},
+  "header": {
+    "template": "blue",
+    "title": {"content": "📋 示例卡片", "tag": "plain_text"}
+  },
+  "elements": [
+    {"tag": "div", "text": {"tag": "lark_md", "content": "这是一个**富文本卡片**示例"}},
+    {"tag": "hr"},
+    {"tag": "div", "text": {"tag": "lark_md", "content": "• 支持Markdown\n• 支持链接\n• 支持样式"}},
+    {"tag": "hr"},
+    {"tag": "div", "text": {"tag": "lark_md", "content": "[点击访问](https://open.feishu.cn)"}}
+  ]
+}

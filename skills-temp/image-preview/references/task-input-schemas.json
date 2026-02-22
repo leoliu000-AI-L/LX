@@ -1,0 +1,101 @@
+{
+  "text2img": {
+    "task": "text2img",
+    "prompt": "Photorealistic portrait of an adult woman, red-blue outfit, subtle golden lock pendant",
+    "negative_prompt": "nsfw, nudity, gore, extra limbs, deformed hands, blurry",
+    "size": "1024x1024",
+    "seed": 314159,
+    "guidance": 6.5,
+    "steps": 28
+  },
+  "edit": {
+    "task": "edit",
+    "prompt": "Replace background with cinematic dark-blue studio lighting, keep face unchanged",
+    "base_image": "file_key_or_url",
+    "mask_image": "optional_file_key_or_url",
+    "image_understanding": {
+      "base": {
+        "subject": "adult east asian woman portrait",
+        "scene": "studio portrait",
+        "style": "photorealistic",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1365
+      },
+      "mask": {
+        "subject": "face region",
+        "scene": "portrait",
+        "style": "mask",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1365
+      }
+    },
+    "negative_prompt": "nsfw, gore, deformed hands, blurry",
+    "size": "1024x1024",
+    "seed": 314159,
+    "guidance": 6.5,
+    "steps": 28
+  },
+  "stylize": {
+    "task": "stylize",
+    "prompt": "Convert to cinematic editorial style while keeping identity",
+    "base_image": "file_key_or_url",
+    "style_image": "optional_style_ref_file_key_or_url",
+    "style_prompt": "optional style prompt if no style_image",
+    "image_understanding": {
+      "base": {
+        "subject": "adult east asian woman portrait",
+        "scene": "street portrait",
+        "style": "photorealistic",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1365
+      },
+      "style": {
+        "subject": "fashion editorial reference",
+        "scene": "studio",
+        "style": "cinematic",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1024
+      }
+    },
+    "negative_prompt": "nsfw, gore, lowres, deformed anatomy",
+    "size": "1024x1024",
+    "seed": 314159,
+    "guidance": 6.5,
+    "steps": 28
+  },
+  "fusion": {
+    "task": "fusion",
+    "prompt": "Fuse two references into one coherent cinematic portrait",
+    "fusion_images": [
+      "file_key_or_url_1",
+      "file_key_or_url_2"
+    ],
+    "image_understanding": {
+      "fusion_1": {
+        "subject": "adult east asian woman face",
+        "scene": "portrait",
+        "style": "photorealistic",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1365
+      },
+      "fusion_2": {
+        "subject": "red blue outfit with golden lock emblem",
+        "scene": "detail",
+        "style": "symbol reference",
+        "safety": "safe",
+        "width": 1024,
+        "height": 1024
+      }
+    },
+    "negative_prompt": "nsfw, gore, extra limbs, logo artifacts",
+    "size": "1024x1024",
+    "seed": 314159,
+    "guidance": 6.5,
+    "steps": 28
+  }
+}

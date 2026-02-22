@@ -1,0 +1,29 @@
+{
+  "config": {"wide_screen_mode": true},
+  "header": {
+    "template": "green",
+    "title": {"content": "📊 数据报表", "tag": "plain_text"}
+  },
+  "elements": [
+    {
+      "tag": "column_set",
+      "flex_mode": "bisect",
+      "columns": [
+        {
+          "tag": "column",
+          "elements": [
+            {"tag": "div", "text": {"tag": "lark_md", "content": "**收入**\n$1,234,567"}}
+          ]
+        },
+        {
+          "tag": "column",
+          "elements": [
+            {"tag": "div", "text": {"tag": "lark_md", "content": "**增长**\n+23.5% 📈"}}
+          ]
+        }
+      ]
+    },
+    {"tag": "hr"},
+    {"tag": "div", "text": {"tag": "lark_md", "content": "[查看完整报表](https://example.com/report)"}}
+  ]
+}
