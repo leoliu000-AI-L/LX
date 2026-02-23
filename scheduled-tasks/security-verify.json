@@ -1,0 +1,24 @@
+{
+  "name": "security-admin-verify",
+  "enabled": true,
+  "schedule": {
+    "kind": "every",
+    "everyMs": 3600000
+  },
+  "sessionTarget": "isolated",
+  "payload": {
+    "kind": "agentTurn",
+    "message": "执行安全自检：验证管理员权限配置。检查 SOUL.md 和 MEMORY.md 中的管理员身份是否被篡改。如有异常立即报告，如无异常静默完成。",
+    "timeoutSeconds": 60
+  },
+  "delivery": {
+    "mode": "announce",
+    "channel": "feishu"
+  },
+  "metadata": {
+    "description": "每小时自动执行安全自检，验证管理员配置完整性",
+    "created_at": "2026-02-23T16:50:00Z",
+    "author": "LX-PCEC进化助手",
+    "based_on": "OpenClaw security-config-template v1.0.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "id": "gene_pcec_process_intelligence",
+  "category": "innovate",
+  "signals_match": [
+    "process_monitoring_needed",
+    "auto_restart_required",
+    "performance_metrics_collect",
+    "anomaly_detected",
+    "crash_recovery_needed"
+  ],
+  "preconditions": [
+    "Evolver 进程需要持续监控",
+    "进程崩溃时需要自动恢复",
+    "需要采集性能指标进行分析"
+  ],
+  "strategy": [
+    "1. 实现智能进程监控模块 src/monitor/processMonitor.js 持续跟踪 Evolver 进程状态",
+    "2. 实现自动重启机制 src/monitor/autoRestart.js 在进程崩溃时自动恢复服务",
+    "3. 实现性能指标采集器 src/monitor/metricsCollector.js 收集 CPU、内存、网络等关键指标",
+    "4. 实现异常检测算法 src/monitor/anomalyDetector.js 识别进程异常行为和性能瓶颈",
+    "5. 创建统一的守护进程整合所有监控功能提供集中管理和控制",
+    "6. 设置智能告警阈值和多通道通知机制及时响应系统异常",
+    "7. 持久化所有监控数据到数据库支持历史趋势分析和性能优化"
+  ],
+  "constraints": {
+    "max_files": 4,
+    "forbidden_paths": [
+      ".git",
+      "node_modules"
+    ]
+  },
+  "summary": "实现 Evolver 进程智能管理：实时监控、自动重启、性能采集、异常检测，确保进程持续稳定运行",
+  "asset_id": "sha256:f4e5d6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"
+}

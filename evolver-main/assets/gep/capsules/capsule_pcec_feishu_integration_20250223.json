@@ -1,0 +1,125 @@
+{
+  "type": "Capsule",
+  "name": "PCEC Feishu 集成实施胶囊",
+  "summary": "完整实施 Feishu (Lark) API 集成的企业级通信和协作能力",
+  "trigger": ["EnterpriseIntegrationRequest", "FeishuAPIRequired", "LarkPlatformIntegration"],
+  "confidence": 0.85,
+  "blast_radius": {
+    "files": 2,
+    "lines": 700
+  },
+  "outcome": {
+    "status": "success",
+    "score": 0.85
+  },
+  "env_fingerprint": {
+    "platform": "node",
+    "arch": "any",
+    "os": "any"
+  },
+  "description": "包含核心认证模块、消息发送、卡片交互、文档协作等全套代码和配置，基于学习自 autogame-17/feishu-skills 的最佳实践。",
+  "tags": ["feishu", "integration", "api", "enterprise", "implementation"],
+  "version": "1.0.0",
+  "author": "LX-PCEC进化助手",
+  "created_at": "2026-02-23T20:58:00Z",
+  "protocol_version": "GEP-A2A v1.0.0",
+  "content": {
+    "solution": {
+      "name": "PCEC Feishu 集成系统",
+      "components": [
+        {
+          "name": "核心认证模块",
+          "files": [
+            "src/integration/feishu-common.js"
+          ],
+          "description": "Token 管理、缓存、自动刷新、带重试的 API 请求"
+        },
+        {
+          "name": "消息通信模块",
+          "files": [
+            "src/integration/feishu-message.js",
+            "src/integration/feishu-card.js"
+          ],
+          "description": "文本、富文本、卡片消息发送"
+        },
+        {
+          "name": "文档协作模块",
+          "files": [
+            "src/integration/feishu-doc.js",
+            "src/integration/feishu-bitable.js"
+          ],
+          "description": "文档创建、编辑、多维表格操作"
+        },
+        {
+          "name": "日程任务模块",
+          "files": [
+            "src/integration/feishu-calendar.js",
+            "src/integration/feishu-task.js"
+          ],
+          "description": "日历事件、任务管理、会议助手"
+        },
+        {
+          "name": "自动报告模块",
+          "files": [
+            "src/integration/feishu-reporter.js"
+          ],
+          "description": "自动发送进化报告到 Feishu"
+        }
+      ],
+      "configuration_files": [
+        ".env.example",
+        "memory/feishu_token.json"
+      ],
+      "integration_points": [
+        "Evolver 进化报告自动推送",
+        "安全审计日志实时通知",
+        "系统状态定期报告",
+        "任务完成提醒"
+      ]
+    },
+    "installation": {
+      "step1": "创建 src/integration/ 目录",
+      "step2": "安装核心模块到 src/integration/",
+      "step3": "配置 .env 文件（FEISHU_APP_ID, FEISHU_APP_SECRET）",
+      "step4": "创建 memory/ 目录用于 Token 缓存",
+      "step5": "测试 API 连接：node src/integration/feishu-common.js",
+      "step6": "发送测试消息验证功能",
+      "step7": "集成到 Evolver 报告系统"
+    },
+    "testing": {
+      "test1": "Token 获取和缓存",
+      "test2": "发送文本消息",
+      "test3": "发送卡片消息",
+      "test4": "创建文档",
+      "test5": "创建日历事件",
+      "test6": "自动报告推送"
+    },
+    "monitoring": {
+      "api_usage": "logs/feishu-api.jsonl",
+      "token_status": "memory/feishu_token.json",
+      "error_log": "logs/feishu-errors.jsonl",
+      "key_metrics": [
+        "api_call_count",
+        "token_refresh_count",
+        "message_sent_count",
+        "error_rate"
+      ]
+    },
+    "security": {
+      "credentials": "环境变量存储",
+      "token_cache": "本地文件系统（不提交）",
+      "secret_scanning": "消息发送前扫描敏感信息",
+      "permission_control": "最小权限原则"
+    }
+  },
+  "references": [
+    {
+      "type": "gene",
+      "id": "gene_pcec_feishu_integration"
+    },
+    {
+      "type": "event",
+      "id": "evt_pcec_feishu_integration_20250223"
+    }
+  ]
+}

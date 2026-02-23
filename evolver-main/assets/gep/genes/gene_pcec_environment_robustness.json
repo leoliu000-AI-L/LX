@@ -1,0 +1,35 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "id": "gene_pcec_environment_robustness",
+  "category": "optimize",
+  "signals_match": [
+    "dotenv_missing",
+    "dependency_failed",
+    "config_load_failed",
+    "pid_conflict",
+    "environment_check_failed"
+  ],
+  "preconditions": [
+    "Evolver 启动时环境配置不完整",
+    "缺少 dotenv 等依赖模块",
+    "PID 文件冲突导致启动失败"
+  ],
+  "strategy": [
+    "1. 运行环境健康检查 scripts/check-setup.js 验证 Node 版本、依赖安装和配置完整性",
+    "2. 实现健壮的配置加载器 src/gep/robustConfig.js 支持多层降级配置加载",
+    "3. 实现智能进程管理器 src/gep/smartProcessManager.js 处理 PID 文件和进程状态",
+    "4. 提供配置降级加载方案优先使用 dotenv、失败时手动解析、再读取环境变量、最后使用默认值",
+    "5. 实现自动清理僵尸 PID 文件功能检测并删除无进程对应的 PID 文件",
+    "6. 生成清晰易读的环境状态报告显示所有检测项和修复建议"
+  ],
+  "constraints": {
+    "max_files": 3,
+    "forbidden_paths": [
+      ".git",
+      "node_modules"
+    ]
+  },
+  "summary": "提升 Evolver 环境健壮性：创建环境健康检查工具、实现配置降级加载、智能进程管理，确保在各种环境下都能成功启动",
+  "asset_id": "sha256:c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d"
+}

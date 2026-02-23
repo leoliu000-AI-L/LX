@@ -1,0 +1,35 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "id": "gene_pcec_diagnostic_integration",
+  "category": "innovate",
+  "signals_match": [
+    "diagnostic_needed",
+    "auto_fix_required",
+    "report_generation",
+    "tool_integration"
+  ],
+  "preconditions": [
+    "需要统一的诊断工具",
+    "需要自动修复能力",
+    "需要生成详细报告"
+  ],
+  "strategy": [
+    "1. 创建统一的一键诊断工具 scripts/diagnose.js 整合所有系统检查功能",
+    "2. 整合所有检查模块包括环境变量检查、进程状态检查、节点连接检查和系统资源检查",
+    "3. 实现自动修复模块 src/repair/autoFix.js 支持常见问题的自动检测和修复",
+    "4. 支持多种修复场景包括清理僵尸 PID 文件、日志轮转配置和自动安装缺失依赖",
+    "5. 生成结构化的诊断报告支持 JSON 格式用于程序处理和文本格式用于人工阅读",
+    "6. 提供自动修复选项 --auto-fix 允许用户一键应用检测到的所有修复方案",
+    "7. 持久化诊断历史记录到日志文件供后续分析和趋势追踪使用"
+  ],
+  "constraints": {
+    "max_files": 2,
+    "forbidden_paths": [
+      ".git",
+      "node_modules"
+    ]
+  },
+  "summary": "整合诊断工具和自动修复能力：创建一键诊断脚本，自动检测和修复常见问题，生成详细诊断报告",
+  "asset_id": "sha256:a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+}

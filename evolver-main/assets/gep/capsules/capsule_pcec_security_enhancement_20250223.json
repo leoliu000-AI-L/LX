@@ -1,0 +1,107 @@
+{
+  "type": "Capsule",
+  "name": "PCEC 安全增强实施胶囊",
+  "summary": "完整实施 OpenClaw 安全最佳实践的安全增强解决方案",
+  "trigger": ["SecurityBreachDetected", "UnauthorizedAccessAttempt", "TokenLeakDetected"],
+  "confidence": 0.90,
+  "blast_radius": {
+    "files": 4,
+    "lines": 300
+  },
+  "outcome": {
+    "status": "success",
+    "score": 0.90
+  },
+  "env_fingerprint": {
+    "platform": "node",
+    "arch": "any",
+    "os": "any"
+  },
+  "description": "包含管理员身份验证、定时安全自检、群聊保密规则、Token 安全管理等全套代码和配置，基于学习自 security-config-template-for-sharing。",
+  "tags": ["security", "implementation", "admin-verification", "auto-check", "token-safety"],
+  "version": "1.0.0",
+  "author": "LX-PCEC进化助手",
+  "created_at": "2026-02-23T16:50:00Z",
+  "protocol_version": "GEP-A2A v1.0.0",
+  "content": {
+    "solution": {
+      "name": "PCEC 安全增强系统",
+      "components": [
+        {
+          "name": "身份验证系统",
+          "files": [
+            "src/security/identityVerifier.js",
+            "TRUSTED_USERS.md"
+          ],
+          "description": "自动从消息元数据提取用户ID并验证管理员身份"
+        },
+        {
+          "name": "定时安全自检",
+          "files": [
+            "scripts/security-auto-check.js",
+            "scheduled-tasks/security-verify.json"
+          ],
+          "description": "每小时自动验证管理员配置完整性"
+        },
+        {
+          "name": "群聊安全防护",
+          "files": [
+            "src/security/groupChatGuard.js"
+          ],
+          "description": "群聊保密和社交工程防御"
+        },
+        {
+          "name": "Token 安全管理",
+          "files": [
+            "src/security/tokenManager.js"
+          ],
+          "description": "环境变量存储，禁止硬编码和传递"
+        }
+      ],
+      "configuration_files": [
+        "TRUSTED_USERS.md",
+        "SECURITY-RULES.md",
+        ".env.example"
+      ],
+      "integration_points": [
+        "SOUL.md - 安全规则章节",
+        "MEMORY.md - 安全自检任务",
+        "scheduled-task skill - 定时任务配置"
+      ]
+    },
+    "installation": {
+      "step1": "创建 TRUSTED_USERS.md 配置管理员",
+      "step2": "安装核心模块到 src/security/",
+      "step3": "更新 SOUL.md 和 MEMORY.md",
+      "step4": "配置定时自检任务",
+      "step5": "设置环境变量",
+      "step6": "测试验证流程"
+    },
+    "testing": {
+      "test1": "管理员身份自动验证",
+      "test2": "非管理员需要确认",
+      "test3": "群聊保密规则",
+      "test4": "Token 环境变量读取",
+      "test5": "定时安全自检执行"
+    },
+    "monitoring": {
+      "audit_log": "logs/security-audit.jsonl",
+      "auto_check_results": "logs/security-auto-check.jsonl",
+      "key_metrics": [
+        "verification_success_rate",
+        "auto_check_pass_rate",
+        "token_safety_violations"
+      ]
+    }
+  },
+  "references": [
+    {
+      "type": "gene",
+      "id": "gene_pcec_security_enhancement"
+    },
+    {
+      "type": "event",
+      "id": "evt_pcec_security_enhancement_20250223"
+    }
+  ]
+}

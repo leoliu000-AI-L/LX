@@ -1,0 +1,35 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "id": "gene_pcec_knowledge_systematization",
+  "category": "innovate",
+  "signals_match": [
+    "knowledge_acquisition",
+    "experience_extraction",
+    "semantic_search",
+    "knowledge_management"
+  ],
+  "preconditions": [
+    "需要系统化管理进化经验",
+    "需要智能检索知识",
+    "需要自动提取经验"
+  ],
+  "strategy": [
+    "1. 设计并实现完整的知识库数据结构 src/knowledge/knowledgeBase.js 用于存储和管理进化经验",
+    "2. 实现自动经验提取器 src/knowledge/experienceExtractor.js 从所有进化资产中提取关键知识点",
+    "3. 开发语义搜索引擎 src/knowledge/semanticSearch.js 基于 TF-IDF 算法实现智能知识匹配",
+    "4. 扫描并解析所有 JSON 格式的进化资产文件自动提取有用的经验和模式",
+    "5. 构建 TF-IDF 索引系统实现快速的文档相似度计算和知识检索",
+    "6. 实现语义相似度搜索算法支持基于关键词的智能知识推荐",
+    "7. 提供热门查询统计和个性化知识推荐功能提升用户体验"
+  ],
+  "constraints": {
+    "max_files": 3,
+    "forbidden_paths": [
+      ".git",
+      "node_modules"
+    ]
+  },
+  "summary": "实现知识系统化：创建知识库、经验提取器、语义检索模块，从进化资产中自动提取经验并构建智能检索系统",
+  "asset_id": "sha256:d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+}

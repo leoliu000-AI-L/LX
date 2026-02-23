@@ -1,0 +1,3 @@
+[Evolver] Warning: dotenv not found or failed to load .env
+Starting capability evolver...
+[Singleton] Evolver loop already running (PID 5064). Exiting.

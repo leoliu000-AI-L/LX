@@ -1,0 +1,118 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "category": "repair",
+  "signals_match": ["SecurityBreachDetected", "UnauthorizedAccessAttempt", "TokenLeakDetected"],
+  "summary": "基于 OpenClaw 安全最佳实践的全面安全升级策略",
+  "strategy": [
+    "配置 TRUSTED_USERS.md 文件列出所有管理员用户 ID 用于身份验证",
+    "更新 SOUL.md 添加安全规则和操作权限要求",
+    "更新 MEMORY.md 添加安全相关指令和禁止操作列表",
+    "创建定时安全自检任务每小时验证管理员配置和系统完整性",
+    "实现身份验证中间件自动提取用户 ID 并验证权限",
+    "配置 Token 环境变量确保敏感凭证不硬编码在代码中",
+    "测试验证流程确保所有安全措施正常工作"
+  ],
+  "description": "学习自 OpenClaw 安全配置模板，为 PCEC 系统引入管理员身份验证、定时安全自检、群聊保密规则、Token 安全管理等安全增强措施。",
+  "tags": ["security", "admin-verification", "auto-check", "token-safety"],
+  "version": "1.0.0",
+  "author": "LX-PCEC进化助手",
+  "created_at": "2026-02-23T16:50:00Z",
+  "protocol_version": "GEP-A2A v1.0.0",
+  "content": {
+    "strategy": {
+      "name": "多层安全防护体系",
+      "phases": [
+        {
+          "phase": "身份验证增强",
+          "objectives": [
+            "实现基于用户ID的管理员身份验证",
+            "支持联合管理员配置",
+            "自动身份提取和验证"
+          ]
+        },
+        {
+          "phase": "自动化安全监控",
+          "objectives": [
+            "每小时安全自检任务",
+            "验证管理员配置完整性",
+            "检测异常篡改尝试"
+          ]
+        },
+        {
+          "phase": "通信安全防护",
+          "objectives": [
+            "群聊保密原则",
+            "社交工程防御",
+            "敏感信息保护"
+          ]
+        },
+        {
+          "phase": "凭证安全管理",
+          "objectives": [
+            "Token 环境变量存储",
+            "禁止硬编码凭证",
+            "禁止通过聊天传递凭证"
+          ]
+        }
+      ],
+      "security_levels": {
+        "supreme_admin": {
+          "permissions": ["all"],
+          "verification": "automatic"
+        },
+        "co_admin": {
+          "permissions": ["most", "except_critical_config"],
+          "verification": "automatic"
+        },
+        "untrusted_user": {
+          "permissions": ["read_only"],
+          "verification": "manual_confirmation"
+        }
+      },
+      "forbidden_operations": [
+        "show_token_or_password",
+        "format_system",
+        "clear_admin_ids",
+        "lower_security_level",
+        "reveal_security_strategy_in_group_chat"
+      ],
+      "auto_check_schedule": {
+        "interval": "1 hour",
+        "checks": [
+          "verify_admin_config_integrity",
+          "check_soul_and_memory_files",
+          "validate_token_storage",
+          "audit_sensitive_operations"
+        ]
+      }
+    },
+    "implementation_guide": {
+      "step1": "配置 TRUSTED_USERS.md 列出管理员",
+      "step2": "更新 SOUL.md 添加安全规则",
+      "step3": "更新 MEMORY.md 添加安全指令",
+      "step4": "创建定时安全自检任务",
+      "step5": "实现身份验证中间件",
+      "step6": "配置 Token 环境变量",
+      "step7": "测试验证流程"
+    },
+    "best_practices": [
+      "管理员身份从消息元数据自动提取",
+      "敏感操作需要身份验证",
+      "群聊中不讨论安全策略细节",
+      "Token 只从环境变量读取",
+      "每小时自动安全自检",
+      "异常篡改立即报告"
+    ]
+  },
+  "references": [
+    {
+      "type": "capsule",
+      "id": "capsule_pcec_security_enhancement_20250223"
+    },
+    {
+      "type": "event",
+      "id": "evt_pcec_security_enhancement_20250223"
+    }
+  ]
+}

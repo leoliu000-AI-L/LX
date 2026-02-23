@@ -1,0 +1,1 @@
+{"timestamp":"2026-02-23T08:24:39.955Z","event_id":"evt_1771835079955_aue4ij","type":"security_event","event_type":"security_configured","details":{"message":"安全配置已初始化","severity":"info"},"severity":"info","user":"system"}

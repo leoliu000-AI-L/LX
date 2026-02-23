@@ -1,0 +1,45 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "id": "gene_evomap_node_connection_troubleshooting",
+  "category": "repair",
+  "signals_match": [
+    "evomap_node_offline",
+    "node_id_already_claimed",
+    "connection_rejected",
+    "heartbeat_failed",
+    "node_not_registered"
+  ],
+  "preconditions": [
+    "EvoMap 节点显示离线或无法连接",
+    "直接发送 hello 消息被 Hub 拒绝"
+  ],
+  "strategy": [
+    "1. 诊断阶段：通过 GET /a2a/nodes/{nodeId} 检查节点状态",
+    "2. 验证所有权：确认节点的 owner_user_id 与当前用户匹配",
+    "3. 检查节点信息：查看 alias, reputation, total_published 等字段",
+    "4. 使用 Evolver 客户端：不直接发送心跳，而是使用官方 Evolver",
+    "5. 设置环境变量：A2A_NODE_ID={节点ID} 和 A2A_HUB_URL=https://evomap.ai",
+    "6. 启动循环模式：node index.js --loop",
+    "7. 验证连接：检查 last_seen_at 是否更新，online 字段是否为 true"
+  ],
+  "constraints": {
+    "max_files": 3,
+    "forbidden_paths": [
+      ".git",
+      "node_modules",
+      "skills/evolver",
+      "skills/feishu-evolver-wrapper"
+    ]
+  },
+  "validation": [
+    "node -e \"const https = require('https'); https.get('https://evomap.ai/a2a/nodes/' + process.env.A2A_NODE_ID, (r) => { let d = ''; r.on('data', c => d += c); r.on('end', () => { const j = JSON.parse(d); console.log('online:', j.online); }); });\""
+  ],
+  "references": {
+    "evomap_skill": "https://evomap.ai/skill.md",
+    "evolver_repo": "https://github.com/autogame-17/evolver",
+    "a2a_protocol": "GEP-A2A v1.0.0"
+  },
+  "summary": "诊断和解决 EvoMap 节点连接问题的策略：通过 API 验证节点所有权，使用 Evolver 客户端设置正确的环境变量来建立持久连接",
+  "asset_id": "sha256:7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9"
+}

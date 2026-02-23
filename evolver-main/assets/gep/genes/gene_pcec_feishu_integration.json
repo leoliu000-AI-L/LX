@@ -1,0 +1,121 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "category": "innovate",
+  "signals_match": ["EnterpriseIntegrationRequest", "FeishuAPIRequired", "LarkPlatformIntegration"],
+  "summary": "基于 feishu-skills 的企业级 Feishu (Lark) API 集成能力",
+  "strategy": [
+    "创建 feishu-common 核心模块实现 Feishu API 认证、Token 缓存和带重试的 HTTP 请求",
+    "实现基础消息发送功能支持文本消息 text、富文本消息 post 和交互式卡片 card",
+    "集成文档协作能力包括文档 docx、知识库 wiki、多维表格 bitable 和云盘 drive 操作",
+    "添加日程任务管理功能支持日历事件 calendar 和任务 task 的创建、查询和管理",
+    "配置必需的环境变量 FEISHU_APP_ID 和 FEISHU_APP_SECRET 用于 API 认证",
+    "测试 Feishu API 连接和权限验证各个模块的访问令牌和接口可用性",
+    "实现自动通知和报告功能将进化结果、安全事件和系统状态推送到 Feishu"
+  ],
+  "description": "学习自 autogame-17/feishu-skills (36个模块)，为 PCEC 系统引入完整的 Feishu API 集成能力，包括消息发送、卡片交互、文档协作、日历任务等企业级功能。",
+  "tags": ["feishu", "integration", "api", "enterprise", "collaboration"],
+  "version": "1.0.0",
+  "author": "LX-PCEC进化助手",
+  "created_at": "2026-02-23T20:58:00Z",
+  "protocol_version": "GEP-A2A v1.0.0",
+  "content": {
+    "strategy": {
+      "name": "Feishu API 集成框架",
+      "phases": [
+        {
+          "phase": "核心认证层",
+          "objectives": [
+            "实现 Token 自动获取和缓存",
+            "支持带重试机制的认证请求",
+            "Token 过期自动刷新"
+          ]
+        },
+        {
+          "phase": "消息通信层",
+          "objectives": [
+            "支持文本、富文本、卡片消息",
+            "批量消息发送",
+            "群聊管理和转发"
+          ]
+        },
+        {
+          "phase": "文档协作层",
+          "objectives": [
+            "文档创建和编辑",
+            "多维表格操作",
+            "知识库集成"
+          ]
+        },
+        {
+          "phase": "日程任务层",
+          "objectives": [
+            "日历事件管理",
+            "任务创建和跟踪",
+            "会议助手功能"
+          ]
+        }
+      ],
+      "architecture": {
+        "core": "feishu-common - 认证、Token 缓存、API 请求",
+        "messaging": ["feishu-message", "feishu-post", "feishu-card", "feishu-image"],
+        "documents": ["feishu-doc", "feishu-wiki", "feishu-bitable", "feishu-drive"],
+        "communication": ["feishu-broadcast", "feishu-batch-sender", "feishu-group-manager"],
+        "calendar": ["feishu-calendar", "feishu-task", "feishu-meeting-assistant"],
+        "automation": ["feishu-evolver-wrapper", "feishu-smart-reply"]
+      },
+      "key_features": {
+        "authentication": {
+          "token_cache": "本地文件系统缓存",
+          "auto_refresh": "Token 过期自动刷新",
+          "retry_with_backoff": "指数退避重试机制",
+          "rate_limiting": "429 错误自动处理"
+        },
+        "security": {
+          "no_hardcoded_secrets": "所有凭证从环境变量读取",
+          "secret_scanning": "消息发送前扫描敏感信息",
+          "permission_control": "细粒度权限管理"
+        },
+        "reliability": {
+          "fetch_with_retry": "3 次重试机制",
+          "timeout_control": "15 秒超时保护",
+          "error_handling": "完善的错误分类和处理"
+        }
+      },
+      "api_endpoints": {
+        "auth": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal",
+        "message": "https://open.feishu.cn/open-apis/im/v1/messages",
+        "document": "https://open.feishu.cn/open-apis/docx/docs",
+        "calendar": "https://open.feishu.cn/open-apis/calendar/v4",
+        "task": "https://open.feishu.cn/open-apis/task/v4"
+      }
+    },
+    "implementation_guide": {
+      "step1": "创建 feishu-common 核心模块（认证、Token 缓存）",
+      "step2": "实现基础消息发送功能（text, post, card）",
+      "step3": "集成文档协作能力（doc, wiki, bitable）",
+      "step4": "添加日程任务管理（calendar, task）",
+      "step5": "配置环境变量（FEISHU_APP_ID, FEISHU_APP_SECRET）",
+      "step6": "测试 API 连接和权限",
+      "step7": "实现自动通知和报告功能"
+    },
+    "best_practices": [
+      "所有凭证通过环境变量配置",
+      "Token 缓存减少 API 调用",
+      "指数退避处理速率限制",
+      "敏感信息扫描防止泄露",
+      "模块化设计便于扩展",
+      "统一错误处理和日志记录"
+    ]
+  },
+  "references": [
+    {
+      "type": "capsule",
+      "id": "capsule_pcec_feishu_integration_20250223"
+    },
+    {
+      "type": "event",
+      "id": "evt_pcec_feishu_integration_20250223"
+    }
+  ]
+}
