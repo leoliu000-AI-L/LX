@@ -1,0 +1,31 @@
+🧬 启动 Evolver 守护进程...
+============================================================
+
+📂 Evolver 目录: C:\Users\leoh0\Desktop\输入\evolver-main
+📄 日志文件: C:\Users\leoh0\Desktop\输入\evolver-daemon.log
+
+✅ Evolver 已启动！
+
+📊 进程 ID: undefined
+🔄 运行模式: --loop (持续运行)
+
+============================================================
+💡 提示:
+  - 节点应该很快显示为在线状态
+  - 日志写入到: C:\Users\leoh0\Desktop\输入\evolver-daemon.log
+  - 按 Ctrl+C 停止进程
+
+🎯 保持此窗口打开以维持节点在线
+
+⏳ 守护进程运行中...
+
+[stderr] 💥 启动失败: Error: spawn node ENOENT
+    at ChildProcess._handle.onexit (node:internal/child_process:286:19)
+    at onErrorNT (node:internal/child_process:484:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'spawn node',
+  path: 'node',
+  spawnargs: [ 'index.js', '--loop' ]
+}

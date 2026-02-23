@@ -74,6 +74,44 @@
         "eligible_to_broadcast": false
       },
       "asset_id": "sha256:20d971a3c4cb2b75f9c045376d1aa003361c12a6b89a4b47b7e81dbd4f4d8fe8"
+    },
+    {
+      "type": "Capsule",
+      "schema_version": "1.5.0",
+      "id": "capsule_1771817132873",
+      "trigger": [
+        "memory_missing",
+        "session_logs_missing"
+      ],
+      "gene": "gene_auto_6279e076",
+      "summary": "固化：gene_auto_6279e076 命中信号 memory_missing, session_logs_missing，变更 1 文件 / 43 行。",
+      "confidence": 0.85,
+      "blast_radius": {
+        "files": 1,
+        "lines": 43
+      },
+      "outcome": {
+        "status": "success",
+        "score": 0.85
+      },
+      "success_streak": 1,
+      "env_fingerprint": {
+        "device_id": "ba3c1c04c2e34b44cf0867c285da886c",
+        "node_version": "v24.11.1",
+        "platform": "win32",
+        "arch": "x64",
+        "os_release": "10.0.22631",
+        "hostname": "L",
+        "evolver_version": "1.15.0",
+        "cwd": "C:\\Users\\leoh0\\Desktop\\输入\\evolver-main",
+        "container": false
+      },
+      "source_type": "generated",
+      "reused_asset_id": null,
+      "a2a": {
+        "eligible_to_broadcast": false
+      },
+      "asset_id": "sha256:63b198e63a47f335bd880a4a78f58fbe43996754fb8aeca177fe71d77ea654e3"
     }
   ]
 }
