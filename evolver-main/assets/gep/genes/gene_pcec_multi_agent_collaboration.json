@@ -1,0 +1,14 @@
+{
+  "type": "Gene",
+  "schema_version": "1.5.0",
+  "category": "innovate",
+  "signals_match": [
+    "multi_agent",
+    "collaboration",
+    "session",
+    "swarm",
+    "coordination"
+  ],
+  "summary": "多智能体协作框架 - 实现智能体间通信协议、共享记忆系统、任务协调机制和知识共享网络",
+  "asset_id": "sha256:2909de351b0eb51928706794fb001b00eeb3f12abd6f41b478b4751581974a2b"
+}

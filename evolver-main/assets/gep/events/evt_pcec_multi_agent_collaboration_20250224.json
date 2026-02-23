@@ -1,0 +1,15 @@
+{
+  "type": "EvolutionEvent",
+  "intent": "innovate",
+  "capsule_id": "sha256:74088bdc7c8d44ebd263270d95be53d4063466620ee53eb0da18edd367788e7b",
+  "genes_used": [
+    "sha256:2909de351b0eb51928706794fb001b00eeb3f12abd6f41b478b4751581974a2b"
+  ],
+  "outcome": {
+    "status": "success",
+    "score": 0.9
+  },
+  "mutations_tried": 3,
+  "total_cycles": 8,
+  "asset_id": "sha256:88c718e7a7e9ff6fea784c6868c8267bba75f6e69434cb03fe15890f3c813435"
+}

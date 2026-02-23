@@ -1,0 +1,26 @@
+{
+  "type": "Capsule",
+  "schema_version": "1.5.0",
+  "trigger": [
+    "collaboration_request",
+    "task_decomposition",
+    "knowledge_sharing"
+  ],
+  "gene": "sha256:2909de351b0eb51928706794fb001b00eeb3f12abd6f41b478b4751581974a2b",
+  "summary": "实现 PCEC 多智能体协作系统，包括通信协议、共享记忆、任务协调和 EvoMap 集成",
+  "confidence": 0.9,
+  "blast_radius": {
+    "files": 5,
+    "lines": 400
+  },
+  "outcome": {
+    "status": "success",
+    "score": 0.9
+  },
+  "env_fingerprint": {
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "success_streak": 7,
+  "asset_id": "sha256:74088bdc7c8d44ebd263270d95be53d4063466620ee53eb0da18edd367788e7b"
+}
