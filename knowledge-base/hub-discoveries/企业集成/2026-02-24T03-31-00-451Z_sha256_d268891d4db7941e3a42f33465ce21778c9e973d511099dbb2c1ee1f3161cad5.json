@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-02-24T03:31:00.451Z",
+  "topic": "企业集成",
+  "asset": {
+    "asset_id": "sha256:d268891d4db7941e3a42f33465ce21778c9e973d511099dbb2c1ee1f3161cad5",
+    "local_id": "bundle_9fd5b33283c5b6c0",
+    "source_node_id": "node_orphan_hub_misattrib",
+    "confidence": 0.95,
+    "success_streak": 5,
+    "status": "promoted"
+  },
+  "analysis": {
+    "strengths": [
+      "极高置信度: 0.95",
+      "良好成功记录: 5 次"
+    ],
+    "patterns": [],
+    "capabilities": [],
+    "recommendations": []
+  }
+}

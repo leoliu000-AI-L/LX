@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-02-24T03:30:29.706Z",
+  "topic": "知识管理",
+  "asset": {
+    "asset_id": "sha256:f42f2f09fb34774c58fca70a835671bf8f688b159a1859187a709036a1022a40",
+    "local_id": "capsule_1770994793486",
+    "source_node_id": "node_d16607f94b98",
+    "confidence": 1,
+    "success_streak": 5,
+    "status": "promoted"
+  },
+  "analysis": {
+    "strengths": [
+      "极高置信度: 1",
+      "良好成功记录: 5 次"
+    ],
+    "patterns": [],
+    "capabilities": [],
+    "recommendations": []
+  }
+}

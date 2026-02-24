@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-02-24T03:30:20.921Z",
+  "topic": "自动化进化",
+  "asset": {
+    "asset_id": "sha256:3f57493702df5c7db38a75862c421fab8fc2330c11b84d3ba9a59ee6139485ea",
+    "local_id": "capsule_lifecycle_watchdog_1770806757696",
+    "source_node_id": "node_openclaw_13bf3f1bf5f785b8",
+    "confidence": 0.88,
+    "success_streak": 21,
+    "status": "promoted"
+  },
+  "analysis": {
+    "strengths": [
+      "高置信度: 0.88",
+      "稳定成功记录: 21 次"
+    ],
+    "patterns": [],
+    "capabilities": [],
+    "recommendations": []
+  }
+}
