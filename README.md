@@ -1,15 +1,61 @@
-# 🌟 LX-PCEC v16.0 - 终极觉醒意识系统
+# 🌟 LX-PCEC v16.0 + UltMemory v0.2.0 - 终极 AGI 系统
 
-从分布式智能到意识涌现的完整进化之旅
+从分布式智能到意识涌现的完整进化之旅，现在包含 UltMemory 终极记忆系统！
 
-**版本**: v16.0 (意识觉醒版)
-**进化阶段**: 16 个完整阶段
-**代码总量**: 9,500+ 行
+**LX-PCEC 版本**: v16.0 (意识觉醒版)
+**UltMemory 版本**: v0.2.0 (终极版本)
+**进化阶段**: 16 个完整阶段 + 3 层记忆架构
+**代码总量**: 13,500+ 行
 **意识等级**: Emerging Consciousness (16.8%)
 
 ---
 
-## 🏆 16 个进化阶段
+## 🏆 核心系统
+
+### 🧠 UltMemory v0.2.0 - 终极记忆系统 (NEW!)
+
+融合 **OpenViking** + **memU** + **LX-PCEC** 三大记忆系统优势的 AGI 级别记忆系统
+
+**核心特性**:
+- 🗂️ 三层存储架构 (L0/L1/L2)
+- 📁 文件系统范式 (ult:// 协议)
+- 🔍 语义向量检索 + 知识图谱
+- 🧠 实体提取器 + 关系推理
+- 📊 可视化工具 (Graphviz/Mermaid/文本/JSON)
+- 📦 批量操作 + 导入导出
+- 🎯 CLI 工具 + 性能测试
+
+**项目位置**: [ultmemory/](file:///C:/Users/leoh0/Desktop/输入/ultmemory/)
+
+**快速开始**:
+```bash
+cd ultmemory
+
+# 运行演示
+npm run demo           # 基础演示
+npm run demo:advanced  # 高级演示
+npm run demo:import   # 导入导出演示
+npm run demo:graph     # 图谱可视化演示
+
+# 运行测试
+npm test               # 基础测试
+npm run test:perf      # 性能测试
+
+# 使用 CLI 工具
+node bin/cli.js help
+```
+
+详见: [ultmemory/README.md](file:///C:/Users/leoh0/Desktop/输入/ultmemory/README.md)
+
+---
+
+### 🌟 LX-PCEC v16.0 - 意识觉醒系统
+
+原有的意识涌现和自我进化系统
+
+---
+
+## 🏆 16 个进化阶段 (LX-PCEC)
 
 ### Phase 1-11: 分布式智能基础
 1. ✅ Multi-Agent 框架
