@@ -1,0 +1,196 @@
+{
+  "results": [
+    {
+      "signals": [
+        "knowledge",
+        "management",
+        "system"
+      ],
+      "category": "knowledge_management",
+      "hit": false,
+      "reason": "fetch_error",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "base",
+        "repository"
+      ],
+      "category": "knowledge_processing",
+      "hit": true,
+      "asset": {
+        "asset_id": "sha256:d3e1609fefa1effdd48788c424894ff2c1a0aed78e29c02ed60fa9b6a3fc19be",
+        "local_id": "bundle_ee0731bc9939173b",
+        "source_node_id": "node_orphan_hub_misattrib",
+        "score": 1.38,
+        "confidence": 0.92,
+        "success_streak": 3
+      }
+    },
+    {
+      "signals": [
+        "knowledge",
+        "graph",
+        "network"
+      ],
+      "category": "knowledge_application",
+      "hit": true,
+      "asset": {
+        "asset_id": "sha256:b32eb97e079a3c49d343d41075a49beca2774708cb2ce418c3ef8039616f7785",
+        "local_id": null,
+        "source_node_id": "node_e0186fc28013ffb1",
+        "score": 2.3,
+        "confidence": 0.92,
+        "success_streak": 5
+      }
+    },
+    {
+      "signals": [
+        "semantic",
+        "search",
+        "retrieval"
+      ],
+      "category": "knowledge_quality",
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "vector",
+        "embed",
+        "similarity"
+      ],
+      "category": "advanced_knowledge",
+      "hit": false,
+      "reason": "no_results",
+      "asset": null
+    },
+    {
+      "signals": [
+        "rag",
+        "retrieval",
+        "augmented"
+      ],
+      "hit": false,
+      "reason": "no_results",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "reasoning",
+        "inference"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "discovery",
+        "mining"
+      ],
+      "hit": false,
+      "reason": "Cannot read properties of undefined (reading 'push')",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "sharing",
+        "exchange"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "validation",
+        "verification"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "quality",
+        "assessment"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "filtering",
+        "curation"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "evolution",
+        "learning"
+      ],
+      "hit": false,
+      "reason": "Cannot read properties of undefined (reading 'push')",
+      "asset": null
+    },
+    {
+      "signals": [
+        "knowledge",
+        "synthesis",
+        "integration"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    },
+    {
+      "signals": [
+        "meta",
+        "knowledge",
+        "reflection"
+      ],
+      "hit": false,
+      "reason": "below_threshold",
+      "asset": null
+    }
+  ],
+  "categories": {
+    "knowledge_management": [],
+    "knowledge_processing": [
+      {
+        "asset_id": "sha256:d3e1609fefa1effdd48788c424894ff2c1a0aed78e29c02ed60fa9b6a3fc19be",
+        "local_id": "bundle_ee0731bc9939173b",
+        "source_node_id": "node_orphan_hub_misattrib",
+        "score": 1.38,
+        "confidence": 0.92,
+        "success_streak": 3
+      }
+    ],
+    "knowledge_application": [
+      {
+        "asset_id": "sha256:b32eb97e079a3c49d343d41075a49beca2774708cb2ce418c3ef8039616f7785",
+        "local_id": null,
+        "source_node_id": "node_e0186fc28013ffb1",
+        "score": 2.3,
+        "confidence": 0.92,
+        "success_streak": 5
+      }
+    ],
+    "knowledge_quality": [],
+    "advanced_knowledge": []
+  }
+}
