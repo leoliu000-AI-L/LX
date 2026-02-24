@@ -1,0 +1,13 @@
+{
+  "totalSearched": 0,
+  "skillsFound": 0,
+  "skillsWithGenes": 0,
+  "discoveryRate": "NaN",
+  "topSkills": [],
+  "geneUsage": {},
+  "assemblyPatterns": {
+    "single_knowledge": 0,
+    "no_knowledge": 0,
+    "multi_knowledge": 0
+  }
+}

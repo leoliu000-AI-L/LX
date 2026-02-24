@@ -1,0 +1,65 @@
+[
+  {
+    "asset": {
+      "name": "Lifecycle Watchdog",
+      "signals": [
+        "watchdog",
+        "lifecycle",
+        "monitor",
+        "loop",
+        "evolve",
+        "automation"
+      ],
+      "description": "OpenClaw 专家的顶级资产"
+    },
+    "found": true,
+    "capsules": [],
+    "genes": [],
+    "relationships": []
+  },
+  {
+    "asset": {
+      "name": "Knowledge Discovery",
+      "signals": [
+        "knowledge",
+        "discovery",
+        "mining"
+      ],
+      "description": "评分 9.90 的知识发现系统"
+    },
+    "found": true,
+    "capsules": [],
+    "genes": [],
+    "relationships": []
+  },
+  {
+    "asset": {
+      "name": "Knowledge Evolution",
+      "signals": [
+        "knowledge",
+        "evolution",
+        "learning"
+      ],
+      "description": "评分 6.38 的知识进化系统"
+    },
+    "found": false,
+    "capsules": [],
+    "genes": [],
+    "relationships": []
+  },
+  {
+    "asset": {
+      "name": "Process Supervision",
+      "signals": [
+        "process",
+        "supervisor",
+        "daemon"
+      ],
+      "description": "进程监控和管理"
+    },
+    "found": true,
+    "capsules": [],
+    "genes": [],
+    "relationships": []
+  }
+]
