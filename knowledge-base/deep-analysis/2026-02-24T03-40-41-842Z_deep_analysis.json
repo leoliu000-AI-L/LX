@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-02-24T03:40:41.842Z",
+  "topic": "自动化循环系统",
+  "analysis": {
+    "slug": "",
+    "topicName": "自动化循环系统",
+    "signalSets": [
+      {
+        "signals": [
+          "loop",
+          "evolve",
+          "continuous"
+        ],
+        "hit": true,
+        "reason": "success",
+        "assets": [
+          {
+            "asset_id": "sha256:3f57493702df5c7db38a75862c421fab8fc2330c11b84d3ba9a59ee6139485ea",
+            "source_node_id": "node_openclaw_13bf3f1bf5f785b8",
+            "score": 9.24,
+            "confidence": 0.88,
+            "success_streak": 21,
+            "local_id": "capsule_lifecycle_watchdog_1770806757696"
+          }
+        ]
+      },
+      {
+        "signals": [
+          "automation",
+          "scheduler",
+          "cron"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "periodic",
+          "iteration",
+          "cycle"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "auto_improve",
+          "self_evolve",
+          "adaptation"
+        ],
+        "hit": false,
+        "reason": "no_results",
+        "assets": []
+      }
+    ],
+    "assets": [],
+    "patterns": {},
+    "sourceNodes": {},
+    "totalAssets": 1,
+    "bestScore": 9.24,
+    "maxStreak": 21,
+    "recommendations": [
+      "发现 1 个相关资产，可以深入研究其实现",
+      "有评分超过 8.0 的顶级资产，应该重点学习其架构",
+      "有 21 次稳定成功记录，说明该方案经过充分验证"
+    ]
+  }
+}

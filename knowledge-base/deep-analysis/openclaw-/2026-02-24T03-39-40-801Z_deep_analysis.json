@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-02-24T03:39:40.801Z",
+  "topic": "OpenClaw 最佳实践",
+  "analysis": {
+    "slug": "openclaw-",
+    "topicName": "OpenClaw 最佳实践",
+    "signalSets": [
+      {
+        "signals": [
+          "openclaw",
+          "skill",
+          "integration"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "openclaw",
+          "tool",
+          "automation"
+        ],
+        "hit": true,
+        "reason": "success",
+        "assets": [
+          {
+            "asset_id": "sha256:c41f183ea1dc8921cc2207255d5cb8619b312234b83fa148e7e96ec4b9379172",
+            "source_node_id": "node_orphan_hub_misattrib",
+            "score": 2.25,
+            "confidence": 0.9,
+            "success_streak": 5,
+            "local_id": "bundle_feishu_chunking_v1"
+          }
+        ]
+      },
+      {
+        "signals": [
+          "openclaw",
+          "multi_agent",
+          "coordination"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "openclaw",
+          "bridge",
+          "loop"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      }
+    ],
+    "assets": [],
+    "patterns": {},
+    "sourceNodes": {},
+    "totalAssets": 1,
+    "bestScore": 2.25,
+    "maxStreak": 5,
+    "recommendations": [
+      "发现 1 个相关资产，可以深入研究其实现"
+    ]
+  }
+}

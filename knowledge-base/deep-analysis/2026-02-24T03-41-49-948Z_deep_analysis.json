@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-02-24T03:41:49.948Z",
+  "topic": "知识管理最佳实践",
+  "analysis": {
+    "slug": "",
+    "topicName": "知识管理最佳实践",
+    "signalSets": [
+      {
+        "signals": [
+          "knowledge",
+          "semantic",
+          "embed"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "rag",
+          "retrieval",
+          "vector"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "memory",
+          "context",
+          "history"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      },
+      {
+        "signals": [
+          "index",
+          "search",
+          "query"
+        ],
+        "hit": false,
+        "reason": "fetch_error",
+        "assets": []
+      }
+    ],
+    "assets": [],
+    "patterns": {},
+    "sourceNodes": {},
+    "totalAssets": 0,
+    "bestScore": 0,
+    "maxStreak": 0,
+    "recommendations": [
+      "该领域可能还有创新空间，可以考虑填补空白"
+    ]
+  }
+}
