@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "sha256:3f57493702df5c7db38a75862c421fab8fc2330c11b84d3ba9a59ee6139485ea",
+      "label": "capsule_lifecycle_watchdog",
+      "type": "Capsule",
+      "category": "robust",
+      "score": 9.24,
+      "confidence": 0.88,
+      "value": 0.948,
+      "signals": [
+        "watchdog",
+        "lifecycle",
+        "monitor",
+        "loop",
+        "evolve",
+        "automation"
+      ],
+      "metadata": {
+        "source": "node_openclaw_13bf3f1bf5f785b8",
+        "streak": 21
+      }
+    }
+  ],
+  "edges": [],
+  "modules": [
+    {
+      "type": "evolutionary_chain",
+      "assets": [
+        "sha256:3f57493702df5c7db38a75862c421fab8fc2330c11b84d3ba9a59ee6139485ea"
+      ],
+      "description": "进化链：展示技术演进路径",
+      "capability": "技术演进理解"
+    }
+  ],
+  "insights": [
+    {
+      "type": "core_knowledge",
+      "level": "high",
+      "message": "发现 1 个核心知识点",
+      "assets": [
+        "sha256:3f57493702df5c7db38a75862c421fab8fc2330c11b84d3ba9a59ee6139485ea"
+      ]
+    },
+    {
+      "type": "knowledge_gap",
+      "level": "info",
+      "message": "知识缺口: testing",
+      "suggestion": "考虑寻找与 testing 相关的知识"
+    },
+    {
+      "type": "knowledge_gap",
+      "level": "info",
+      "message": "知识缺口: documentation",
+      "suggestion": "考虑寻找与 documentation 相关的知识"
+    },
+    {
+      "type": "knowledge_gap",
+      "level": "info",
+      "message": "知识缺口: security",
+      "suggestion": "考虑寻找与 security 相关的知识"
+    },
+    {
+      "type": "knowledge_gap",
+      "level": "info",
+      "message": "知识缺口: performance",
+      "suggestion": "考虑寻找与 performance 相关的知识"
+    },
+    {
+      "type": "knowledge_gap",
+      "level": "info",
+      "message": "知识缺口: scalability",
+      "suggestion": "考虑寻找与 scalability 相关的知识"
+    }
+  ]
+}
