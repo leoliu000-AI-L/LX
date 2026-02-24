@@ -1,0 +1,31 @@
+digraph "UltMemory Knowledge Graph" {
+  layout=dot;
+  rankdir=LR;
+  node [shape=box];
+
+  "0" [label="Leo 是一名软件工程师，在 Google 工作。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "1" [label="Leo 擅长 JavaScript 和 Python。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "2" [label="Google 开发了 TensorFlow 和 Go 语言。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "3" [label="TensorFlow 用于机器学习和深度学习。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "4" [label="Python 是 AI 和机器学习的主要语言。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "5" [label="JavaScript 是 Web 开发的主流语言。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "6" [label="Go 语言以其高性能和并发特性著称。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "7" [label="Microsoft 开发了 TypeScript 和 Azu...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "8" [label="TypeScript 是 JavaScript 的超集。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "9" [label="OpenAI 开发了 GPT 系列，总部位于旧金山。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "10" [label="GPT-4 是最先进的大语言模型之一。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+  "11" [label="旧金山是硅谷的一部分，科技公司的聚集地。...", fillcolor="#3498db", style="filled,rounded", fontsize=10];
+
+  "1" -> "0" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "2" -> "0" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "3" -> "2" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "4" -> "1" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "5" -> "1" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "7" -> "2" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "8" -> "7" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "8" -> "1" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "8" -> "5" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "9" -> "2" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "9" -> "7" [label="keyword_match", penwidth=0.5, fontsize=8];
+  "10" -> "9" [label="keyword_match", penwidth=0.5, fontsize=8];
+}

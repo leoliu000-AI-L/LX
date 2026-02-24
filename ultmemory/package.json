@@ -1,0 +1,36 @@
+{
+  "name": "ultmemory",
+  "version": "0.2.0",
+  "description": "UltMemory - 终极记忆系统 (OpenViking + memU + LX-PCEC)",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "ultmemory": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node tests/basic-test.js",
+    "test:perf": "node tests/performance-test.js",
+    "demo": "node demos/basic-demo.js",
+    "demo:advanced": "node demos/advanced-demo.js",
+    "demo:import": "node demos/import-export-demo.js",
+    "demo:graph": "node demos/graph-viz-demo.js"
+  },
+  "keywords": [
+    "memory",
+    "ai",
+    "consciousness",
+    "proactive",
+    "quantum",
+    "bci",
+    "evolution",
+    "knowledge-graph",
+    "entity-extraction",
+    "visualization"
+  ],
+  "author": "UltMemory Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

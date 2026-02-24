@@ -1,0 +1,238 @@
+{
+  "nodes": [
+    {
+      "id": 0,
+      "type": "knowledge",
+      "label": "Leo 是一名软件工程师，在 Google 工作。...",
+      "data": {
+        "content": "Leo 是一名软件工程师，在 Google 工作。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": "knowledge",
+      "label": "Leo 擅长 JavaScript 和 Python。...",
+      "data": {
+        "content": "Leo 擅长 JavaScript 和 Python。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "knowledge",
+      "label": "Google 开发了 TensorFlow 和 Go 语言。...",
+      "data": {
+        "content": "Google 开发了 TensorFlow 和 Go 语言。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "knowledge",
+      "label": "TensorFlow 用于机器学习和深度学习。...",
+      "data": {
+        "content": "TensorFlow 用于机器学习和深度学习。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "knowledge",
+      "label": "Python 是 AI 和机器学习的主要语言。...",
+      "data": {
+        "content": "Python 是 AI 和机器学习的主要语言。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "knowledge",
+      "label": "JavaScript 是 Web 开发的主流语言。...",
+      "data": {
+        "content": "JavaScript 是 Web 开发的主流语言。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": "knowledge",
+      "label": "Go 语言以其高性能和并发特性著称。...",
+      "data": {
+        "content": "Go 语言以其高性能和并发特性著称。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": "knowledge",
+      "label": "Microsoft 开发了 TypeScript 和 Azu...",
+      "data": {
+        "content": "Microsoft 开发了 TypeScript 和 Azure AI。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": "knowledge",
+      "label": "TypeScript 是 JavaScript 的超集。...",
+      "data": {
+        "content": "TypeScript 是 JavaScript 的超集。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": "knowledge",
+      "label": "OpenAI 开发了 GPT 系列，总部位于旧金山。...",
+      "data": {
+        "content": "OpenAI 开发了 GPT 系列，总部位于旧金山。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "knowledge",
+      "label": "GPT-4 是最先进的大语言模型之一。...",
+      "data": {
+        "content": "GPT-4 是最先进的大语言模型之一。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "type": "knowledge",
+      "label": "旧金山是硅谷的一部分，科技公司的聚集地。...",
+      "data": {
+        "content": "旧金山是硅谷的一部分，科技公司的聚集地。",
+        "metadata": {
+          "type": "knowledge",
+          "category": "memories"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": 0,
+      "from": 1,
+      "to": 0,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 1,
+      "from": 2,
+      "to": 0,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 2,
+      "from": 3,
+      "to": 2,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 3,
+      "from": 4,
+      "to": 1,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 4,
+      "from": 5,
+      "to": 1,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 5,
+      "from": 7,
+      "to": 2,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 6,
+      "from": 8,
+      "to": 7,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 7,
+      "from": 8,
+      "to": 1,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 8,
+      "from": 8,
+      "to": 5,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 9,
+      "from": 9,
+      "to": 2,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 10,
+      "from": 9,
+      "to": 7,
+      "type": "keyword_match",
+      "weight": 0.5
+    },
+    {
+      "id": 11,
+      "from": 10,
+      "to": 9,
+      "type": "keyword_match",
+      "weight": 0.5
+    }
+  ],
+  "stats": {
+    "nodeCount": 12,
+    "edgeCount": 12
+  }
+}
