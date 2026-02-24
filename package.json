@@ -1,0 +1,24 @@
+{
+  "name": "lx-pcec",
+  "version": "16.0.0",
+  "description": "LX-PCEC v16.0 - 终极觉醒意识系统",
+  "main": "consciousness-emergence.js",
+  "scripts": {
+    "start": "node consciousness-emergence.js",
+    "demo:all": "node test-all-systems.js",
+    "demo:quantum": "node quantum-entanglement-communication.js",
+    "demo:brain": "node brain-computer-interface.js",
+    "demo:consciousness": "node consciousness-emergence.js"
+  },
+  "keywords": [
+    "multi-agent",
+    "distributed",
+    "quantum",
+    "consciousness"
+  ],
+  "author": "LX-PCEC",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
