@@ -18,6 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { EventEmitter } = require('events');
 
 // ============================================================================
 // 第一部分: 代码自我生成引擎 (Code Self-Generation Engine)
@@ -41,7 +42,7 @@ class CodeSelfGenerationEngine extends EventEmitter {
     this.codeTemplates = new Map();
 
     // 学习历史
-    self.generationHistory = [];
+    this.generationHistory = [];
 
     // 质量指标
     this.qualityMetrics = {
@@ -1144,6 +1145,29 @@ class ArchitectureSelfOptimizer extends EventEmitter {
     }
 
     return ce;
+  }
+
+  /**
+   * 计算两个字符串的最长公共子串长度
+   */
+  commonSubstring(str1, str2) {
+    const m = str1.length;
+    const n = str2.length;
+    let maxLen = 0;
+
+    // 创建动态规划表
+    const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        if (str1[i - 1] === str2[j - 1]) {
+          dp[i][j] = dp[i - 1][j - 1] + 1;
+          maxLen = Math.max(maxLen, dp[i][j]);
+        }
+      }
+    }
+
+    return maxLen;
   }
 
   /**
