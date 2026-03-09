@@ -1,0 +1,6 @@
+{
+  "name": "openclaw-skill-weather",
+  "version": "1.0.0",
+  "description": "Fetch current weather and forecasts from wttr.in",
+  "main": "index.js"
+}

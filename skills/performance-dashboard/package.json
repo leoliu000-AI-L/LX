@@ -1,0 +1,9 @@
+{
+  "name": "performance-dashboard",
+  "version": "1.0.0",
+  "description": "Evolution performance metrics dashboard",
+  "main": "index.js",
+  "keywords": ["performance", "metrics", "dashboard", "evolution"],
+  "author": "",
+  "license": "MIT"
+}

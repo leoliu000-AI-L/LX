@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-skill-code-stats",
+  "version": "1.0.0",
+  "description": "Analyze repository complexity and generate code statistics",
+  "main": "index.js",
+  "dependencies": {
+    "glob": "^10.3.10"
+  }
+}

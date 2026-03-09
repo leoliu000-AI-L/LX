@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-skill-todo-manager",
+  "version": "1.0.0",
+  "description": "Extract TODO/FIXME comments from code and manage task lists",
+  "main": "index.js",
+  "dependencies": {
+    "glob": "^10.3.10"
+  }
+}

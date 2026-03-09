@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-skill-markdown-converter",
+  "version": "1.0.0",
+  "description": "Convert Markdown documents to HTML, plain text, and other formats",
+  "main": "index.js",
+  "dependencies": {
+    "marked": "^12.0.0"
+  }
+}

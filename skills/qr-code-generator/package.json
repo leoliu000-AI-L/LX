@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-skill-qr-code-generator",
+  "version": "1.0.0",
+  "description": "Generate QR codes from text/URLs with PNG and terminal output support",
+  "main": "index.js",
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  }
+}

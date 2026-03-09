@@ -1,0 +1,6 @@
+{
+  "name": "openclaw-skill-url-shortener",
+  "version": "1.0.0",
+  "description": "Shorten long URLs using is.gd and tinyurl services",
+  "main": "index.js"
+}

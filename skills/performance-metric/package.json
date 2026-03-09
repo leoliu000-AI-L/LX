@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-skill-performance-metric",
+  "version": "1.0.0",
+  "description": "Track evolver performance metrics and generate self-reflection dashboards",
+  "main": "index.js",
+  "dependencies": {
+    "glob": "^10.3.10"
+  }
+}
